@@ -7,10 +7,9 @@ namespace ats_maintenance_tracker_group2.Models
 {
     public class Engineer: Staff
     {
-        // add job parameter
-        public void CompleteJob()
+        public void CompleteJob (Job job)
         {
-            Console.WriteLine($"Completing job: ");
+            // complete job process
         }
     }
 }

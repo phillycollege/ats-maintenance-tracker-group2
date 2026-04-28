@@ -16,9 +16,11 @@ namespace ats_maintenance_tracker_group2.Models
         public int RuntimeHours { get; set; }
         public bool IsHighWinds { get; set; }
         public string OperationalStatus { get; set; }
+        public string Coordinates { get; set; }
 
         // Navigational Properties
         [ForeignKey(nameof(FarmID))]
         public string FarmID { get; set; }
+        public WindFarm WindFarm { get; set; }
     }
 }

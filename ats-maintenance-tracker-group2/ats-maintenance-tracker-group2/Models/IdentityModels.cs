@@ -20,9 +20,15 @@ namespace ats_maintenance_tracker_group2.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+        public DbSet<Staff> Staff { get; set; }
+        public DbSet<Job> Jobs { get; set; }
+        public DbSet<Shift> Shifts { get; set; }
+        public DbSet<WindFarm> WindFarms { get; set; }
+        public DbSet<Turbine> Turbines { get; set; }
+        
+        public ApplicationDbContext() : base("ATSMaintenanceTrackerConnection", throwIfV1Schema: false)
         {
+            Database.SetInitializer(new DatabaseInitialiser());
         }
 
         public static ApplicationDbContext Create()
