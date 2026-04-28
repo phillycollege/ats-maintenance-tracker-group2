@@ -183,6 +183,7 @@
     <Compile Include="Models\Shift.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\Turbine.cs" />
+    <Compile Include="Models\WindFarm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
