@@ -20,5 +20,6 @@ namespace ats_maintenance_tracker_group2.Models
         public string Postcode { get; set; }
         public decimal Salary { get; set; }
         public string EmploymentRole { get; set; }
+        public string StaffType { get; set; }
     }
 }

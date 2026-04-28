@@ -7,10 +7,9 @@ namespace ats_maintenance_tracker_group2.Models
 {
     public class CallHandler: Staff
     {
-        // add job parameter
-        public void LogFault()
+        public void LogFault (Job job)
         {
-            Console.WriteLine($"Logging fault for job: ");
+            // log fault process
         }
     }
 }
