@@ -178,6 +178,7 @@
     <Compile Include="Models\CallHandler.cs" />
     <Compile Include="Models\Engineer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Job.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\Turbine.cs" />
