@@ -1,8 +1,15 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
+﻿# Visual Studio
+.vs/
 
-/.vs/Garry Assessment/v17
-/ats-maintenance-tracker-group2/ats-maintenance-tracker-group2/.vs
-/ats-maintenance-tracker-group2/.vs/ats-maintenance-tracker-group2
-/ats-maintenance-tracker-group2/packages
+# Build results
+bin/
+obj/
+
+# NuGet packages (if applicable)
+packages/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
