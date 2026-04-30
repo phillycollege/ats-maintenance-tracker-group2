@@ -17,8 +17,9 @@ namespace ats_maintenance_tracker_group2.Models
         public bool IsHighWinds { get; set; }
         public string OperationalStatus { get; set; }
 
-        // Navigational Properties
+        // Navigational Properth
         [ForeignKey(nameof(FarmID))]
         public string FarmID { get; set; }
+        public WindFarm farm { get; set; }
     }
 }
