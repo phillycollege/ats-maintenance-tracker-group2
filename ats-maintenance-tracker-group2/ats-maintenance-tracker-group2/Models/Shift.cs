@@ -17,7 +17,7 @@ namespace ats_maintenance_tracker_group2.Models
         [ForeignKey(nameof(staffID))]
         public Staff staff { get; set; }
         public string shiftType { get; set; }
-        public bool mon { get; set; }jfsdjosfjsodjfosd
+        public bool mon { get; set; }
         public bool tue { get; set; }
         public bool wed { get; set; }
         public bool thu { get; set; }
