@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace ats_maintenance_tracker_group2.Models
+namespace ats_maintenance_tracker_group2.Models.ViewModels
 {
     public class ExternalLoginConfirmationViewModel
     {

@@ -20,5 +20,6 @@ namespace ats_maintenance_tracker_group2.Models
         // Navigational Properties
         [ForeignKey(nameof(FarmID))]
         public string FarmID { get; set; }
+        public WindFarm farm { get; set; }
     }
 }

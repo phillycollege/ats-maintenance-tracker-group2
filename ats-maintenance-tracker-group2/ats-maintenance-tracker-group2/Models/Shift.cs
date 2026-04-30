@@ -10,19 +10,20 @@ namespace ats_maintenance_tracker_group2.Models
     public class Shift
     {
         [Key]
-        public string shiftRecordID { get; set; }
+        public string ShiftRecordID { get; set; }
+        public string ShiftType { get; set; }
+        public bool Mon { get; set; }
+        public bool Tue { get; set; }
+        public bool Wed { get; set; }
+        public bool Thu { get; set; }
+        public bool Fri { get; set; }
+        public bool Sat { get; set; }
+        public bool Sun { get; set; }
 
         //Navigational Property
-        public string staffID { get; set; }
-        [ForeignKey(nameof(staffID))]
+        public string StaffID { get; set; }
+
+        [ForeignKey(nameof(StaffID))]
         public Staff staff { get; set; }
-        public string shiftType { get; set; }
-        public bool mon { get; set; }
-        public bool tue { get; set; }
-        public bool wed { get; set; }
-        public bool thu { get; set; }
-        public bool fri { get; set; }
-        public bool sat { get; set; }
-        public bool sun { get; set; }
     }
     }

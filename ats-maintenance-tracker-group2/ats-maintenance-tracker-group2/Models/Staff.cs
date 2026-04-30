@@ -18,7 +18,7 @@ namespace ats_maintenance_tracker_group2.Models
         public string Address1 { get; set; }
         public string City { get; set; }
         public string Postcode { get; set; }
-        public decimal Salary { get; set; }
+        public decimal  Salary { get; set; }
         public string EmploymentRole { get; set; }
     }
 }

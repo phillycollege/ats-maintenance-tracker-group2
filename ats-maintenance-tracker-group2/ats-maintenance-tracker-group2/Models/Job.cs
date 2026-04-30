@@ -10,31 +10,29 @@ namespace ats_maintenance_tracker_group2.Models
     public class Job
     {
         [Key]
-        public string jobID { get; set; }
-        public DateTime jobDate { get; set; }
-        public DateTime jobTime { get; set; }
+        public string JobID { get; set; }
+        public DateTime JobDate { get; set; }
+        public DateTime JobTime { get; set; }
+        public string JobType { get; set; }
+        public string FaultDescription { get; set; }
+        public bool MainGeneratorServiced { get; set; }
+        public bool GearboxServiced { get; set; }
+        public bool YawMotorServiced { get; set; }
+        public bool InternalPassengerLiftServiced { get; set; }
+        public string JobCompleteStatus { get; set; }
 
         //Navigational Properties
-        public string farmID { get; set; }
-        [ForeignKey(nameof(farmID))]
+        public string FarmID { get; set; }
+        [ForeignKey(nameof(FarmID))]
         public WindFarm windfarm { get; set; }
 
-        public string turbineID { get; set; }
-        [ForeignKey(nameof(turbineID))]
+        public string TurbineID { get; set; }
+        [ForeignKey(nameof(TurbineID))]
         public Turbine turbine { get; set; }
 
-        public string staffID { get; set; }
-        [ForeignKey(nameof(staffID))]
+        public string StaffID { get; set; }
+        [ForeignKey(nameof(StaffID))]
         public Staff staff { get; set; }
-
-        public string jobType { get; set; }
-        public string faultDescription { get; set; }
-        public bool mainGeneratorServiced { get; set; }
-        public bool gearboxServiced { get; set; }
-        public bool yawMotorServiced { get; set; }
-        public bool internalPassengerLiftServiced { get; set; }
-        public string jobCompleteStatus { get; set; }
-
 
     }
 }
