@@ -10,31 +10,31 @@ namespace ats_maintenance_tracker_group2.Models
     public class Job
     {
         [Key]
-        public string jobID { get; set; }
-        public DateTime jobDate { get; set; }
-        public DateTime jobTime { get; set; }
+        public int JobID { get; set; }
+        public DateTime JobDate { get; set; } // this is to match up with what day the engineer's shift (mon - sun could be any)
+        public string JobTime { get; set; } // Early or Late
+
+
+        public string JobType { get; set; }
+        public string FaultDescription { get; set; }
+        public bool MainGeneratorServiced { get; set; }
+        public bool GearboxServiced { get; set; }
+        public bool YawMotorServiced { get; set; }
+        public bool InternalPassengerLiftServiced { get; set; }
+        public string JobCompleteStatus { get; set; }
+
 
         //Navigational Properties
-        public string farmID { get; set; }
-        [ForeignKey(nameof(farmID))]
-        public WindFarm windfarm { get; set; }
+        [ForeignKey("WindFarm")]
+        public string FarmID { get; set; }
+        public WindFarm WindFarm { get; set; }
 
-        public string turbineID { get; set; }
-        [ForeignKey(nameof(turbineID))]
-        public Turbine turbine { get; set; }
+        [ForeignKey("Turbine")]
+        public string TurbineID { get; set; }
+        public Turbine Turbine { get; set; }
 
-        public string staffID { get; set; }
-        [ForeignKey(nameof(staffID))]
-        public Staff staff { get; set; }
-
-        public string jobType { get; set; }
-        public string faultDescription { get; set; }
-        public bool mainGeneratorServiced { get; set; }
-        public bool gearboxServiced { get; set; }
-        public bool yawMotorServiced { get; set; }
-        public bool internalPassengerLiftServiced { get; set; }
-        public string jobCompleteStatus { get; set; }
-
-
+        [ForeignKey("Staff")]
+        public string StaffID { get; set; }
+        public Staff Staff { get; set; }
     }
 }

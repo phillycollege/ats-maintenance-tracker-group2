@@ -49,9 +49,8 @@ namespace ats_maintenance_tracker_group2.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "StaffID")]
+        public string StaffID { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
