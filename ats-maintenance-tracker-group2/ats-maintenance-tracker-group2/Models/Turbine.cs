@@ -17,9 +17,20 @@ namespace ats_maintenance_tracker_group2.Models
         public bool IsHighWinds { get; set; }
         public string OperationalStatus { get; set; }
 
-        // Navigational Properth
+        // Navigational Properties
         [ForeignKey(nameof(FarmID))]
         public string FarmID { get; set; }
         public WindFarm farm { get; set; }
+
+        //Logic
+        public bool RequiresService() 
+        {
+            return RuntimeHours >= 2000 && OperationalStatus != "ServiceScheduled";
+        }
+
+        public void MarkServiceScheduled()
+        {
+            OperationalStatus = "ServiceScheduled";
+        }
     }
 }

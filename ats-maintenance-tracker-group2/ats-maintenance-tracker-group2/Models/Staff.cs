@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -20,5 +21,11 @@ namespace ats_maintenance_tracker_group2.Models
         public string Postcode { get; set; }
         public decimal Salary { get; set; }
         public string EmploymentRole { get; set; }
+        public string StaffType { get; set; }
+
+        //Navigational Property
+        public string ShiftID { get; set; }
+        [ForeignKey(nameof(ShiftID))]
+        public Shift shift { get; set; }
     }
 }
