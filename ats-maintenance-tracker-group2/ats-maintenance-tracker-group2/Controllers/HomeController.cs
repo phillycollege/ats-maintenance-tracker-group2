@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ats_maintenance_tracker_group2.Models;
+using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +10,10 @@ namespace ats_maintenance_tracker_group2.Controllers
 {
     public class HomeController : Controller
     {
+        private ATSDBContext context = new ATSDBContext();
         public ActionResult Index()
         {
+            var allWindFarms = context.WindFarms.ToList();
             return View();
         }
 

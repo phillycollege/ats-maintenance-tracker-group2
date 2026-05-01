@@ -15,22 +15,12 @@ namespace ats_maintenance_tracker_group2.Models
         public string TurbineModel { get; set; }
         public int RuntimeHours { get; set; }
         public bool IsHighWinds { get; set; }
-        public string OperationalStatus { get; set; }
+        public string OperationalStatus { get; set; } // Active, Needs Service, Fault
+        public string Coordinates { get; set; }
 
         // Navigational Properties
-        [ForeignKey(nameof(FarmID))]
+        [ForeignKey("WindFarm")]
         public string FarmID { get; set; }
-        public WindFarm farm { get; set; }
-
-        //Logic
-        public bool RequiresService() 
-        {
-            return RuntimeHours >= 2000 && OperationalStatus != "ServiceScheduled";
-        }
-
-        public void MarkServiceScheduled()
-        {
-            OperationalStatus = "ServiceScheduled";
-        }
+        public WindFarm WindFarm { get; set; }
     }
 }

@@ -16,6 +16,5 @@ namespace ats_maintenance_tracker_group2.Models
         public string City { get; set; }
         public string Postcode { get; set; }
         public string Region { get; set; }
-        public double Coords { get; set; }
     }
 }

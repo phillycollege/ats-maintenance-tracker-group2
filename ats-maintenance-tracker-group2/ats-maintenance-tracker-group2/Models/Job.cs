@@ -22,10 +22,6 @@ namespace ats_maintenance_tracker_group2.Models
         public bool InternalPassengerLiftServiced { get; set; }
         public string JobCompleteStatus { get; set; }
 
-        //Navigational Properties & Foreign Keys
-        public string FarmID { get; set; }
-        [ForeignKey(nameof(FarmID))]
-        public WindFarm windfarm { get; set; }
 
         public string TurbineID { get; set; }
         [ForeignKey(nameof(TurbineID))]
@@ -35,63 +31,17 @@ namespace ats_maintenance_tracker_group2.Models
         [ForeignKey(nameof(StaffID))]
         public Staff staff { get; set; }
 
-        //Logic
-        public Engineer AssignEngineer(IEnumerable<Engineer> engineers)
-        {
-            foreach (var engineer in engineers)
-            {
-                var shift = engineer.Shift;
+        //Navigational Properties
+        [ForeignKey("WindFarm")]
+        public string FarmID { get; set; }
+        public WindFarm WindFarm { get; set; }
 
-                // Shift type must match the job ("Early" / "Late")
-                if (!string.Equals(shift.ShiftType, JobTime,
-                    StringComparison.OrdinalIgnoreCase))
-                    continue;
+        [ForeignKey("Turbine")]
+        public string TurbineID { get; set; }
+        public Turbine Turbine { get; set; }
 
-                // Engineer must be working on JobDate
-                bool worksThatDay =
-                    (JobDate.DayOfWeek == DayOfWeek.Monday && shift.Mon) ||
-                    (JobDate.DayOfWeek == DayOfWeek.Tuesday && shift.Tue) ||
-                    (JobDate.DayOfWeek == DayOfWeek.Wednesday && shift.Wed) ||
-                    (JobDate.DayOfWeek == DayOfWeek.Thursday && shift.Thu) ||
-                    (JobDate.DayOfWeek == DayOfWeek.Friday && shift.Fri) ||
-                    (JobDate.DayOfWeek == DayOfWeek.Saturday && shift.Sat) ||
-                    (JobDate.DayOfWeek == DayOfWeek.Sunday && shift.Sun);
-
-                if (!worksThatDay)
-                    continue;
-
-                // Engineer must NOT already have a job on this date
-                bool alreadyHasJob =
-                    engineer.Jobs.Any(j => j.JobDate.Date == JobDate.Date);
-
-                if (alreadyHasJob)
-                    continue;
-
-                //Engineer is valid – assign
-                StaffID = engineer.StaffID;
-                return engineer;
-            }
-
-            return null; // No available engineer
-
-        }
-
-
-
-        public static Job CreateServiceJob(Turbine turbine, Engineer engineer, string jobTime, DateTime jobDate)
-        {
-
-            return new Job
-            {
-                JobID = Guid.NewGuid().ToString(),
-                JobDate = jobDate,
-                JobTime = jobTime,
-                JobType = "Service",
-                TurbineID = turbine.TurbineID,
-                JobCompleteStatus = "Scheduled"
-            };
-
-
-        }
+        [ForeignKey("Staff")]
+        public string StaffID { get; set; }
+        public Staff Staff { get; set; }
     }
 }

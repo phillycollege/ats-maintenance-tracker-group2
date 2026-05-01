@@ -1,41 +1,58 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
+    <title>@ViewBag.Title - ATS Tracker Application</title>
+
     @Scripts.Render("~/bundles/modernizr")
 
+    <link rel="stylesheet" href="~/Content/styles.css">
+    <link rel="stylesheet" href="~/Content/app.css">
+
+    <script src="~/Scripts/icons.js" defer></script>
+    <script src="~/Scripts/modal.js" defer></script>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <!-- Production version -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>
-                 @Html.Partial("_LoginPartial")
+    <div class="modal" id="modal">
+        <div class="modal-box" id="modal-box">
+            <div class="modal-close" onclick="closeModal()"><i data-lucide="x"></i></div>
+            <div class="box full" id="modal-box-contents"></div>
+        </div>
+    </div>
+    <div class="app">
+        <div class="account-bar-wrapper">
+            <div class="account-bar">
+                <div class="app-icon">
+                    <div class="app-icon-clickable">
+                        <a href="@Url.Action("Index", "Home")">
+                            <div class='icon' style="width: 40px; height: 40px">
+                                <img src="~/Images/logo.png" alt="logo" />
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="account-image">
+                    <div class='icon round' style="width: 40px; height: 40px">
+                        <img src="~/Images/user-picture.png" alt="logo" />
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        <div class="content">
+            <div class="content-wrapper">
+                <div class="box mb-05">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>

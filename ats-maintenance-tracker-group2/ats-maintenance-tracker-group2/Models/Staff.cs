@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+using System.Data.Entity;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace ats_maintenance_tracker_group2.Models
 {
-    public class Staff
+    // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
+    public class Staff : IdentityUser
     {
         [Key]
         public string StaffID { get; set; }
@@ -20,12 +21,14 @@ namespace ats_maintenance_tracker_group2.Models
         public string City { get; set; }
         public string Postcode { get; set; }
         public decimal Salary { get; set; }
-        public string EmploymentRole { get; set; }
-        public string StaffType { get; set; }
+        public string EmploymentRole { get; set; } // Call Handler, Engineer or Manager
 
-        //Navigational Property
-        public string ShiftID { get; set; }
-        [ForeignKey(nameof(ShiftID))]
-        public Shift shift { get; set; }
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Staff> manager)
+        {
+            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+            // Add custom user claims here
+            return userIdentity;
+        }
     }
 }
