@@ -11,7 +11,7 @@ namespace ats_maintenance_tracker_group2.Models
     {
         //Primary Key
         [Key]
-        public string JobID { get; set; }
+        public int JobID { get; set; }
         public DateTime JobDate { get; set; }
         public string JobTime { get; set; } //Early 07:00 - 14:00, Late 14:00 - 21:00
         public string JobType { get; set; } //Service or Fault Job
