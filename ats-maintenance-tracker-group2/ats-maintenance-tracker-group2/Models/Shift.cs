@@ -11,7 +11,7 @@ namespace ats_maintenance_tracker_group2.Models
     {
         // this applies for every week in the calendar year (repeated schedule)
         [Key]
-        public string ShiftRecordID { get; set; }
+        public int ShiftRecordID { get; set; }
         public string ShiftType { get; set; } //Early: 07:00 - 14:00, Late: 14:00-21:00
         public bool Mon { get; set; }
         public bool Tue { get; set; }
