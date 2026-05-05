@@ -23,6 +23,7 @@ namespace ats_maintenance_tracker_group2.Models
 
             // all engineers
             Staff engineer1 = new Staff() {
+                Id = "S001",
                 StaffID = "S001",
                 FirstName = "Alex",
                 LastName = "MacLeod",
@@ -37,7 +38,9 @@ namespace ats_maintenance_tracker_group2.Models
                 Salary = 42000,
                 EmploymentRole = "Engineer"
             };
-            Staff engineer2 = new Staff() {
+            Staff engineer2 = new Staff()
+            {
+                Id = "S002",
                 StaffID = "S002",
                 FirstName = "Jamie",
                 LastName = "Fraser",
@@ -54,6 +57,7 @@ namespace ats_maintenance_tracker_group2.Models
 
             };
             Staff engineer3 = new Staff() {
+                Id = "S003",
                 StaffID = "S003",
                 FirstName = "Morgan",
                 LastName = "Reid",
@@ -68,7 +72,9 @@ namespace ats_maintenance_tracker_group2.Models
                 Salary = 39500m,
                 EmploymentRole = "Engineer"
             };
-            Staff engineer4 = new Staff() {
+            Staff engineer4 = new Staff()
+            {
+                Id = "S004",
                 StaffID = "S004",
                 FirstName = "Taylor",
                 LastName = "Campbell",
@@ -85,6 +91,7 @@ namespace ats_maintenance_tracker_group2.Models
 
             };
             Staff engineer5 = new Staff() {
+                Id = "S005",
                 StaffID = "S005",
                 FirstName = "Casey",
                 LastName = "Douglas",
@@ -101,6 +108,7 @@ namespace ats_maintenance_tracker_group2.Models
 
             };
             Staff engineer6 = new Staff() {
+                Id = "S006",
                 StaffID = "S006",
                 FirstName = "Jordan",
                 LastName = "Stewart",
@@ -115,7 +123,8 @@ namespace ats_maintenance_tracker_group2.Models
                 Salary = 32000m,
                 EmploymentRole = "Engineer"
             };
-            Staff engineer7 = new Staff() { 
+            Staff engineer7 = new Staff() {
+                Id = "S007",
                 StaffID = "S007",
                 FirstName = "Riley",
                 LastName = "Henderson",
@@ -132,6 +141,7 @@ namespace ats_maintenance_tracker_group2.Models
 
             };
             Staff engineer8 = new Staff() {
+                Id = "S008",
                 StaffID = "S008",
                 FirstName = "Avery",
                 LastName = "Paterson",
@@ -158,6 +168,7 @@ namespace ats_maintenance_tracker_group2.Models
             // 2 call handlers
             Staff callHandler1 = new Staff()
             {
+                Id = "S009",
                 StaffID = "S009",
                 FirstName = "Quinn",
                 LastName = "Robertson",
@@ -173,6 +184,7 @@ namespace ats_maintenance_tracker_group2.Models
                 EmploymentRole = "CallHandler"
             };
             Staff callHandler2 = new Staff() {
+                Id = "S010",
                 StaffID = "S010",
                 FirstName = "Cameron",
                 LastName = "Lawson",
@@ -191,6 +203,7 @@ namespace ats_maintenance_tracker_group2.Models
             // 1 manager
             Staff manager1 = new Staff()
             {
+                Id = "S011",   
                 StaffID = "S011",
                 FirstName = "Kamran",
                 LastName = "Ledford",
@@ -221,7 +234,7 @@ namespace ats_maintenance_tracker_group2.Models
 
                 Shifts.Add(new Shift() {
                     ShiftRecordID = shiftId,
-                    StaffID = engineer.StaffID,
+                    Id = engineer.StaffID,
                     ShiftType = shiftId <= 4 ? "Early" : "Late",
                     Mon = workingDays.Contains("Mon"),
                     Tue = workingDays.Contains("Tue"),
@@ -369,7 +382,7 @@ namespace ats_maintenance_tracker_group2.Models
 
             foreach (var engineer in engineers)
             {
-                var shift = Shifts.First(s => s.StaffID == engineer.StaffID);
+                var shift = Shifts.First(s => s.Id == engineer.StaffID);
 
                 for (int day = 0; day < 7; day++) {
                     DateTime jobDate = startDate.AddDays(day);
