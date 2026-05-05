@@ -22,15 +22,6 @@ namespace ats_maintenance_tracker_group2.Models
         public bool InternalPassengerLiftServiced { get; set; }
         public string JobCompleteStatus { get; set; }
 
-
-        public string TurbineID { get; set; }
-        [ForeignKey(nameof(TurbineID))]
-        public Turbine turbine { get; set; }
-
-        public string StaffID { get; set; }
-        [ForeignKey(nameof(StaffID))]
-        public Staff staff { get; set; }
-
         //Navigational Properties
         [ForeignKey("WindFarm")]
         public string FarmID { get; set; }

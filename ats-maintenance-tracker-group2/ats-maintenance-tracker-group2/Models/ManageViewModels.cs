@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace ats_maintenance_tracker_group2.Models.ViewModels
+namespace ats_maintenance_tracker_group2.Models
 {
     public class IndexViewModel
     {
