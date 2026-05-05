@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ats_maintenance_tracker_group2.Models.Turbine>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.WindFarm.FarmName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TurbineMake)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TurbineModel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RuntimeHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsHighWinds)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OperationalStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Coordinates)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.WindFarm.FarmName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TurbineMake)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TurbineModel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RuntimeHours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsHighWinds)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OperationalStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Coordinates)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TurbineID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TurbineID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TurbineID })
+        </td>
+    </tr>
+}
+
+</table>
