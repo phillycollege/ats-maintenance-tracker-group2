@@ -23,7 +23,7 @@ namespace ats_maintenance_tracker_group2.Models
 
         //Navigational Property
         [ForeignKey("Staff")]
-        public string StaffID { get; set; }
+        public string Id { get; set; }
         public Staff Staff { get; set; }
     }
 }
