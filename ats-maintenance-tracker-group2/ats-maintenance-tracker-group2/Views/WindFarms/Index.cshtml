@@ -4,60 +4,47 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="box full dfb align-center pd-1 mb-3">
+    <div class="text-xxl bold-600 full">All WindFarms</div>
+    <a href="@Url.Action("Create", "WindFarms")">
+        <button type="submit" class="xxxs pd-12 pdx-2 fit whitespace-nowrap">
+            <i data-lucide="plus" style="height: 18px;"></i> Create New WindFarm
+        </button>
+    </a>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FarmName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Postcode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Region)
-        </th>
-        <th></th>
-    </tr>
+<div class="table-container">
+    <table class="custom-table">
+        <thead>
+            <tr id='head-row'>
+                <th>@Html.DisplayNameFor(model => model.FarmName)</th>
+                <th>@Html.DisplayNameFor(model => model.Address1)</th>
+                <th>@Html.DisplayNameFor(model => model.Address2)</th>
+                <th>@Html.DisplayNameFor(model => model.City)</th>
+                <th>@Html.DisplayNameFor(model => model.Postcode)</th>
+                <th>@Html.DisplayNameFor(model => model.Region)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td class='name'>@Html.DisplayFor(modelItem => item.FarmName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Address1)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Address2)</td>
+                    <td>@Html.DisplayFor(modelItem => item.City)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Postcode)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Region)</td>
+                    <td>
+                        <div class="box full dfb gap-10">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.FarmID }, new { @class = "box fit visible-link accent-color" } ) |
+                            @Html.ActionLink("Details", "Details", new { id=item.FarmID }, new { @class = "box fit visible-link accent-color" }) |
+                            @Html.ActionLink("Delete", "Delete", new { id=item.FarmID }, new { @class = "box fit visible-link accent-color" })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FarmName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Postcode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Region)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.FarmID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.FarmID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.FarmID })
-        </td>
-    </tr>
-}
-
-</table>
