@@ -1,69 +1,51 @@
 ﻿@model IEnumerable<ats_maintenance_tracker_group2.Models.Turbine>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "All Turbines";
 }
 
-<h2>Index</h2>
+<div class="box full dfb align-center pd-1 mb-3">
+    <div class="text-xxl bold-600 full">All Turbines</div>
+    <a href="@Url.Action("Create", "Turbines")">
+        <button type="submit" class="xxxs pd-12 pdx-2 fit whitespace-nowrap">
+            <i data-lucide="plus" style="height: 18px;"></i> Create New Turbine
+        </button>
+    </a>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.WindFarm.FarmName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TurbineMake)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TurbineModel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RuntimeHours)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsHighWinds)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OperationalStatus)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Coordinates)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.WindFarm.FarmName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TurbineMake)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TurbineModel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RuntimeHours)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsHighWinds)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OperationalStatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Coordinates)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TurbineID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TurbineID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TurbineID })
-        </td>
-    </tr>
-}
-
-</table>
+<div class="table-container">
+    <table class="custom-table">
+        <thead>
+            <tr id='head-row'>
+                <th>@Html.DisplayNameFor(model => model.WindFarm.FarmName)</th>
+                <th>@Html.DisplayNameFor(model => model.TurbineMake)</th>
+                <th>@Html.DisplayNameFor(model => model.TurbineModel)</th>
+                <th>@Html.DisplayNameFor(model => model.RuntimeHours)</th>
+                <th>@Html.DisplayNameFor(model => model.IsHighWinds)</th>
+                <th>@Html.DisplayNameFor(model => model.OperationalStatus)</th>
+                <th>@Html.DisplayNameFor(model => model.Coordinates)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td class='name'>@Html.DisplayFor(modelItem => item.WindFarm.FarmName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TurbineMake)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TurbineModel)</td>
+                    <td>@Html.DisplayFor(modelItem => item.RuntimeHours)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IsHighWinds)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OperationalStatus)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Coordinates)</td>
+                    <td>
+                        <div class="box full dfb gap-10">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.TurbineID }, new { @class = "box fit visible-link accent-color" }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.TurbineID }, new { @class = "box fit visible-link accent-color" }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.TurbineID }, new { @class = "box fit visible-link accent-color" })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

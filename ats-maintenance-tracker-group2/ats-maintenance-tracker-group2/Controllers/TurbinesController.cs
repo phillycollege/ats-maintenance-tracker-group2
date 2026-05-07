@@ -28,7 +28,7 @@ namespace ats_maintenance_tracker_group2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Turbine turbine = db.Turbines.Find(id);
+            Turbine turbine = db.Turbines.Include(t => t.WindFarm).ToList().Find(t => t.TurbineID == id);
             if (turbine == null)
             {
                 return HttpNotFound();
