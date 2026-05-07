@@ -4,88 +4,93 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<div class="text-xxl bold-600 full">
+    Edit Windfarm
+</div>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>Turbine</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.TurbineID)
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.TurbineID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TurbineMake, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TurbineMake, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TurbineMake, "", new { @class = "text-danger" })
-            </div>
+    <br />
+
+    <div class="box full pd-05">
+        @Html.LabelFor(model => model.TurbineMake, htmlAttributes: new { @class = "text-xxs full mb-1" })
+        @Html.EditorFor(model => model.TurbineMake, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Turbine Make" } })
+        @Html.ValidationMessageFor(model => model.TurbineMake, "", new { @class = "text-xxs full text-center error-text mb-1" })
+    </div>
+
+    <div class="box full pd-05">
+        @Html.LabelFor(model => model.TurbineModel, htmlAttributes: new { @class = "text-xxs full mb-1" })
+        @Html.EditorFor(model => model.TurbineModel, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Turbine Model" } })
+        @Html.ValidationMessageFor(model => model.TurbineModel, "", new { @class = "text-xxs full text-center error-text mb-1" })
+    </div>
+
+    <div class="box full pd-05">
+        @Html.LabelFor(model => model.RuntimeHours, htmlAttributes: new { @class = "text-xxs full mb-1" })
+        @Html.EditorFor(model => model.RuntimeHours, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Runtime Hours" } })
+        @Html.ValidationMessageFor(model => model.RuntimeHours, "", new { @class = "text-xxs full text-center error-text mb-1" })
+    </div>
+
+    <div class="box full pd-05">
+        <div class="form-check d-flex align-items-center">
+        @Html.CheckBoxFor(
+            model => model.IsHighWinds,
+            new {@class = "form-check-input-me-2"}
+        )
+
+        @Html.LabelFor(
+            model => model.IsHighWinds,
+            new { @class = "form-check-label mb-0" }
+        )
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TurbineModel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TurbineModel, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TurbineModel, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @Html.ValidationMessageFor(
+            model => model.IsHighWinds,
+            "",
+            new {@class = "text-xxs full text-center-error-text mb-1"}
+        )
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.RuntimeHours, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RuntimeHours, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RuntimeHours, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div class="box full pd-05">
+        @Html.LabelFor(model => model.OperationalStatus, htmlAttributes: new { @class = "text-xxs full mb-1" })
+        @Html.EditorFor(model => model.OperationalStatus, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Operation Status" } })
+        @Html.ValidationMessageFor(model => model.OperationalStatus, "", new { @class = "text-xxs full text-center error-text mb-1" })
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsHighWinds, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsHighWinds)
-                    @Html.ValidationMessageFor(model => model.IsHighWinds, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+    <div class="box full pd-05">
+        @Html.LabelFor(model => model.Coordinates, htmlAttributes: new { @class = "text-xxs full mb-1" })
+        @Html.EditorFor(model => model.Coordinates, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Coordinates" } })
+        @Html.ValidationMessageFor(model => model.Coordinates, "", new { @class = "text-xxs full text-center error-text mb-1" })
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.OperationalStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.OperationalStatus, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.OperationalStatus, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Coordinates, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Coordinates, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Coordinates, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FarmID, "FarmID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("FarmID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.FarmID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.FarmID, "FarmID", htmlAttributes: new { @class = "text-xxs full mb-1" })
+        <div class="col-md-10">
+            @Html.DropDownList("FarmID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.FarmID, "", new { @class = "text-danger" })
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <div class="box full dfb align-center gap-10 mt-1">
+        <button type="submit" class="xxxs pd-12 pdx-2 fit whitespace-nowrap">
+            <i data-lucide="square-pen" style="height: 18px;"></i> Save
+        </button>
+
+        <a href="@Url.Action("Index", "Turbines", new { id = Model.TurbineID })">
+            <button class="xxxs pd-12 pdx-2 fit outline-black whitespace-nowrap">
+                Back To List
+            </button>
+        </a>
+    </div>
 </div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
