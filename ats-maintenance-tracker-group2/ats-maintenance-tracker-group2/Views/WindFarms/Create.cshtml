@@ -4,32 +4,29 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
-
-
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>WindFarm</h4>
-        <hr />
+    <div class="box full">
+        <h2>Create WindFarm</h2>
+        <br />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.FarmID, htmlAttributes: new { @class = "control-label col-md-2" })
+
+        <div class="box full pd-05">
+            @Html.EditorFor(model => model.FarmID, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Farm Id" } })
+            @Html.ValidationMessageFor(model => model.FarmID, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
+
+        <div class="box full pd-05 dfb column align-center justify-center mt-1 gap-5">
+            @Html.LabelFor(model => model.FarmName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FarmID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FarmID, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.FarmName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FarmName, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="box full pd-05">
-            @Html.EditorFor(model => model.Region, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Farm Id" } })
-            @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-xxs full text-center error-text mb-1" })
-        </div>
-        </div>
-
-        <div class="form-group">
+        <div class="box full pd-05 dfb column align-center justify-center mt-1 gap-5">
             @Html.LabelFor(model => model.Address1, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Address1, new { htmlAttributes = new { @class = "form-control" } })
@@ -37,7 +34,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="box full pd-05 dfb column align-center justify-center mt-1 gap-5">
             @Html.LabelFor(model => model.Address2, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Address2, new { htmlAttributes = new { @class = "form-control" } })
@@ -45,7 +42,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="box full pd-05 dfb column align-center justify-center mt-1 gap-5">
             @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
@@ -53,7 +50,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="box full pd-05 dfb column align-center justify-center mt-1 gap-5">
             @Html.LabelFor(model => model.Postcode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Postcode, new { htmlAttributes = new { @class = "form-control" } })
@@ -61,7 +58,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="box full pd-05 dfb column align-center justify-center mt-1 gap-5">
             @Html.LabelFor(model => model.Region, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Region, new { htmlAttributes = new { @class = "form-control" } })
@@ -69,7 +66,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="box full pd-05 dfb column align-center justify-center mt-1 gap-5">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

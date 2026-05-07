@@ -1,0 +1,74 @@
+﻿@model ats_maintenance_tracker_group2.Models.Turbine
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Turbine</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.WindFarm.FarmName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WindFarm.FarmName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TurbineMake)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TurbineMake)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TurbineModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TurbineModel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RuntimeHours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RuntimeHours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsHighWinds)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsHighWinds)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OperationalStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OperationalStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Coordinates)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Coordinates)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TurbineID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
