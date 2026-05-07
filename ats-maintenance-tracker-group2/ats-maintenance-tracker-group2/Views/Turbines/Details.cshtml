@@ -1,74 +1,39 @@
 ﻿@model ats_maintenance_tracker_group2.Models.Turbine
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Turbine Details";
 }
 
-<h2>Details</h2>
+<br />
+<div class="text-xxxs grey-5">Turbine Details</div>
 
-<div>
-    <h4>Turbine</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.WindFarm.FarmName)
-        </dt>
+<div class="box full dfb column">
+    <div class="text-xl full bold-600 pd-05">@Model.WindFarm.FarmName - @Model.TurbineID</div>
+    <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.WindFarm.FarmName)
-        </dd>
+    <div class="text-xxs full bold-600 pd-05 underline"><u>Turbine Build Info</u></div>
+    <div class="text-xxs full pd-05">@Model.TurbineMake</div>
+    <div class="text-xxs full pd-05">@Model.TurbineModel</div>
+    <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TurbineMake)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TurbineMake)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TurbineModel)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TurbineModel)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RuntimeHours)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RuntimeHours)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsHighWinds)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsHighWinds)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.OperationalStatus)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OperationalStatus)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Coordinates)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Coordinates)
-        </dd>
-
-    </dl>
+    <div class="text-xxs full bold-600 pd-05 underline"><u>Runtime Hours</u></div>
+    <div class="text-xxs full pd-05">@Model.RuntimeHours hours</div>
+    <br />
+    
+    <div class="text-xxs full bold-600 pd-05 underline"><u></u></div>
+    <div class="text-xxs full pd-05"><b>Operational Status</b> @Model.OperationalStatus</div>
+    <div class="text-xxs full pd-05">Coordinates ( @Model.Coordinates )</div>
+    <div class="text-xxs full pd-05">High Winds: @Model.IsHighWinds</div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TurbineID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="box full dfb align-center gap-10 mt-3">
+    <a href="@Url.Action("Edit", "Turbines", new { id = Model.TurbineID })">
+        <button class="xxxs pd-12 pdx-2 fit whitespace-nowrap">
+            <i data-lucide="square-pen" style="height: 18px;"></i> Edit
+        </button>
+    </a>
+    <a href="@Url.Action("Index", "Turbines")">
+        <button class="xxxs pd-12 pdx-2 fit outline-black whitespace-nowrap">
+            Back To List
+        </button>
+    </a>
+</div>
