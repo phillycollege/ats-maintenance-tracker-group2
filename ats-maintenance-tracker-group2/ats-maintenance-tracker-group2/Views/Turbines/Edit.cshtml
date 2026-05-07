@@ -4,7 +4,9 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<div class="text-xxl bold-600 full">
+    Edit Windfarm
+</div>
 
 
 @using (Html.BeginForm())
@@ -12,10 +14,11 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>Turbine</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.TurbineID)
+
+    <br />
 
     <div class="box full pd-05">
         @Html.LabelFor(model => model.TurbineMake, htmlAttributes: new { @class = "text-xxs full mb-1" })
