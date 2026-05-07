@@ -525,3 +525,184 @@ textarea.border-radius-30 { border-radius: 30px; }
 .no-trans { transition: none; }
 .no-select { user-select: none; }
 img.no-img-drag { -webkit-user-drag: none; }
+
+select {
+	width: fit-content;
+	padding: 8px 12px;
+	border: 1px solid #ececec;
+	border-radius: 15px;
+	outline: none;
+}
+select.xxxs {
+	font-size: 0.9rem;
+}
+
+select.xxs {
+	font-size: 1rem;
+}
+
+select.xs {
+	font-size: 1.1rem;
+}
+
+select.s {
+	font-size: 1.2rem;
+}
+
+select.sm {
+	font-size: 1.35rem;
+}
+
+select.m {
+	font-size: 1.5rem;
+}
+
+select.ml {
+	font-size: 1.65rem;
+}
+
+select.l {
+	font-size: 1.8rem;
+}
+
+select.xl {
+	font-size: 2rem;
+}
+
+select.xxl {
+	font-size: 2.15rem;
+}
+
+select.xxxl {
+	font-size: 2.15rem;
+}
+select.pd-05 {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+select.pd-1 {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+select.pd-11 {
+	padding-top: 11px;
+	padding-bottom: 11px;
+}
+
+select.pd-12 {
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+
+select.pd-13 {
+	padding-top: 13px;
+	padding-bottom: 13px;
+}
+
+select.pd-14 {
+	padding-top: 14px;
+	padding-bottom: 14px;
+}
+
+select.pd-15 {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+select.pd-2 {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+select.pd-3 {
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+select.pd-4 {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+select.pd-5 {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+select.pd-6 {
+	padding-top: 60px;
+	padding-bottom: 60px;
+}
+
+select.pd-7 {
+	padding-top: 70px;
+	padding-bottom: 70px;
+}
+
+select.pd-8 {
+	padding-top: 80px;
+	padding-bottom: 80px;
+}
+
+select.pd-9 {
+	padding-top: 90px;
+	padding-bottom: 90px;
+}
+
+
+select.pdx-05 {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+select.pdx-1 {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+select.pdx-15 {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+select.pdx-2 {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+select.pdx-3 {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+select.pdx-4 {
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+select.pdx-5 {
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+select.pdx-6 {
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+select.pdx-7 {
+	padding-left: 70px;
+	padding-right: 70px;
+}
+
+select.pdx-8 {
+	padding-left: 80px;
+	padding-right: 80px;
+}
+
+select.pdx-9 {
+	padding-left: 90px;
+	padding-right: 90px;
+}

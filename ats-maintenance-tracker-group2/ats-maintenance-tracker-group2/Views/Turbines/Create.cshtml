@@ -1,19 +1,18 @@
 ﻿@model ats_maintenance_tracker_group2.Models.Turbine
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Turbine";
 }
 
-<h2>Create</h2>
+<div class="text-xxl bold-600 full">
+    Create Turbine
+</div>
+<br />
 
-
-@using (Html.BeginForm()) 
-{
+@using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
-    
+
 <div class="form-horizontal">
-    <h4>Turbine</h4>
-    <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="box full pd-05">
@@ -39,22 +38,10 @@
 
     <div class="box full pd-05 mt-s2">
         <div class="form-check d-flex align-items-center">
-            @Html.CheckBoxFor(
-                model => model.IsHighWinds,
-                new { @class = "form-check-input me-2" }
-            )
-
-            @Html.LabelFor(
-                model => model.IsHighWinds,
-                new { @class = "form-check-label mb-0" }
-            )
+            @Html.CheckBoxFor(model => model.IsHighWinds, new { @class = "form-check-input me-2" })
+            @Html.LabelFor(model => model.IsHighWinds, new { @class = "form-check-label mb-0" })
         </div>
-
-        @Html.ValidationMessageFor(
-            model => model.IsHighWinds,
-            "",
-            new { @class = "text-xxs full text-center error-text mb-1" }
-        )
+        @Html.ValidationMessageFor(model => model.IsHighWinds, "", new { @class = "text-xxs full text-center error-text mb-1" })
     </div>
 
 
@@ -69,23 +56,20 @@
     </div>
 
     <div class="box full pd-05">
-        @Html.EditorFor(model => model.FarmID, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Farm Id" } })
+        @Html.DropDownList("FarmID", null, htmlAttributes: new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Farm Id" })
         @Html.ValidationMessageFor(model => model.FarmID, "", new { @class = "text-xxs full text-center error-text mb-1" })
     </div>
 
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
+    <div class="box full dfb align-center gap-10 mt-1">
+        <button type="submit" class="xxxs pd-12 pdx-2 fit whitespace-nowrap">Create</button>
+        <a href="@Url.Action("Index", "Turbines")">
+            <button type="button" class="xxxs pd-12 pdx-2 fit outline-black whitespace-nowrap">
+                Back To List
+            </button>
+        </a>
     </div>
 </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
