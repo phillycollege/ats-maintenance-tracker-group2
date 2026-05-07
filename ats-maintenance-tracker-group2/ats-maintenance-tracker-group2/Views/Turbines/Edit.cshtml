@@ -5,7 +5,7 @@
 }
 
 <div class="text-xxl bold-600 full">
-    Edit Windfarm
+    Edit Turbine
 </div>
 
 
@@ -73,7 +73,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.FarmID, "FarmID", htmlAttributes: new { @class = "text-xxs full mb-1" })
         <div class="col-md-10">
-            @Html.DropDownList("FarmID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownList("FarmID", null, htmlAttributes: new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Farm Id" })
             @Html.ValidationMessageFor(model => model.FarmID, "", new { @class = "text-danger" })
         </div>
     </div>
