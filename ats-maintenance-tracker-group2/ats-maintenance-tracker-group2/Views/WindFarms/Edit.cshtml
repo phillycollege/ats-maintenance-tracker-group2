@@ -3,79 +3,71 @@
 @{
     ViewBag.Title = "Edit";
 }
-
-<h2>Edit</h2>
-
+<div class="text-xxl bold-600 full">
+    Edit Windfarm
+</div>
+<br />
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>WindFarm</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.FarmID)
+<div class="form-horizontal">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FarmName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FarmName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FarmName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.FarmID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Address1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address2, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Address2, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Postcode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Postcode, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Postcode, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Region, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Region, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
+    <div class="box full pd-05">
+        @Html.LabelFor(model => model.FarmName, htmlAttributes: new { @class = "text-xxs full mb-1" })
+        @Html.EditorFor(model => model.Region, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Farm Name" } })
+        @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-xxs full text-center error-text mb-1" })
     </div>
+
+    <div class="box full pd-05">
+        @Html.LabelFor(model => model.Address1, htmlAttributes: new { @class = "text-xxs full mb-1" })
+        @Html.EditorFor(model => model.Address1, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Address 1" } })
+        @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-xxs full text-center error-text mb-1" })
+    </div>
+
+    <div class="box full pd-05">
+        @Html.LabelFor(model => model.Address2, htmlAttributes: new { @class = "text-xxs full mb-1" })
+        @Html.EditorFor(model => model.Address2, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Address 2" } })
+        @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-xxs full text-center error-text mb-1" })
+    </div>
+
+    <div class="box full pd-05">
+        @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "text-xxs full mb-1" })
+        @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "City" } })
+        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-xxs full text-center error-text mb-1" })
+    </div>
+
+    <div class="box full pd-05">
+        @Html.LabelFor(model => model.Postcode, htmlAttributes: new { @class = "text-xxs full mb-1" })
+        @Html.EditorFor(model => model.Postcode, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Postcode" } })
+        @Html.ValidationMessageFor(model => model.Postcode, "", new { @class = "text-xxs full text-center error-text mb-1" })
+    </div>
+
+    <div class="box full pd-05">
+        @Html.LabelFor(model => model.Region, htmlAttributes: new { @class = "text-xxs full mb-1" })
+        @Html.EditorFor(model => model.Region, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Region" } })
+        @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-xxs full text-center error-text mb-1" })
+    </div>
+
+    <div class="box full dfb align-center gap-10 mt-3">
+            <button type="submit" class="xxxs pd-12 pdx-2 fit whitespace-nowrap">
+                <i data-lucide="square-pen" style="height: 18px;"></i> Save
+            </button>
+
+        <a href="@Url.Action("Index", "WindFarms", new { id = Model.FarmID })">
+            <button class="xxxs pd-10 pdx-2 fit outline-black whitespace-nowrap">
+                Back To List
+            </button>
+        </a>
+    </div>
+</div>
+
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
