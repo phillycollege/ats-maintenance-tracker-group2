@@ -21,7 +21,7 @@ namespace ats_maintenance_tracker_group2.Controllers
                 // ✅ Only Engineers can view shifts
                 if (staff.EmploymentRole != "Engineer")
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                    return RedirectToAction("Index", "Home");
                 }
 
                 var shifts = db.Shifts
