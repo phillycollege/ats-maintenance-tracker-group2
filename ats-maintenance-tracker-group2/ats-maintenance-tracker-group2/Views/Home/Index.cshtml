@@ -10,24 +10,24 @@
 
 <div class="box full dfb gap-10 wrap no-select">
     @if (Model.EmploymentRole == "CallHandler" || Model.EmploymentRole == "Manager") {
-        <a href="@Url.Action("Index", "WindFarms")" class="box fit" style="min-width: 400px;">
+        <a href="@Url.Action("Index", "WindFarms")" class="box fit" style="min-width: 350px;">
             <div class="navigation-card" style="background: rgba(132, 255, 61, 0.376);">
                 <div class="navigation-card-icon" style="background: rgb(132, 255, 61);">
-                    <i data-lucide="pickaxe"></i>
+                    <i data-lucide="tractor"></i>
                 </div>
                 <div class="text-m bold-700 full">WindFarms</div>
             </div>
         </a>
-        <a href="@Url.Action("Index", "Turbines")" class="box fit" style="min-width: 400px;">
+        <a href="@Url.Action("Index", "Turbines")" class="box fit" style="min-width: 350px;">
             <div class="navigation-card" style="background: rgba(166, 98, 255, 0.376);">
                 <div class="navigation-card-icon" style="background: rgba(166, 98, 255);">
-                    <i data-lucide="pickaxe"></i>
+                    <i data-lucide="fan"></i>
                 </div>
                 <div class="text-m bold-700 full">Turbines</div>
             </div>
         </a>
     }
-    <a href="@Url.Action("Index", "Jobs")" class="box fit" style="min-width: 400px;">
+    <a href="@Url.Action("Index", "Jobs")" class="box fit" style="min-width: 350px;">
         <div class="navigation-card" style="background: rgba(255, 106, 188, 0.376);">
             <div class="navigation-card-icon" style="background: rgba(255, 106, 188);">
                 <i data-lucide="pickaxe"></i>
@@ -36,10 +36,10 @@
         </div>
     </a>
     @if (Model.EmploymentRole == "Manager") {
-        <a href="@Url.Action("Index", "Shifts")" class="box fit" style="min-width: 400px;">
+        <a href="@Url.Action("Index", "Shifts")" class="box fit" style="min-width: 350px;">
             <div class="navigation-card" style="background: rgba(255, 94, 94, 0.376);">
                 <div class="navigation-card-icon" style="background: rgba(255, 94, 94);">
-                    <i data-lucide="pickaxe"></i>
+                    <i data-lucide="calendar-clock"></i>
                 </div>
                 <div class="text-m bold-700 full">Engineer Shifts</div>
             </div>
