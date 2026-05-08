@@ -1,0 +1,38 @@
+﻿@model ats_maintenance_tracker_group2.Models.Job
+
+@{
+    ViewBag.Title = "Job Details";
+}
+
+<br />
+<div class="text-xxxs grey-5">@Model.JobType Job Details</div>
+
+<div class="box full dfb column">
+    <div class="text-xl full bold-600 pd-05">@Model.WindFarm.FarmName - @Model.TurbineID</div>
+    <div class="text-xxs full pd-05">Job Status - @Model.JobCompleteStatus</div>
+    <div class="text-xs full pd-05 line-height-14">@Model.FaultDescription</div>
+    <br />
+
+    <div class="text-xxs full bold-600 pd-05 underline"><u>Job Info</u></div>
+    <div class="text-xxs full pd-05">GearboxServiced - @Model.GearboxServiced</div>
+    <div class="text-xxs full pd-05">InternalPassengerLiftServiced - @Model.InternalPassengerLiftServiced</div>
+    <div class="text-xxs full pd-05">MainGeneratorServiced - @Model.MainGeneratorServiced</div>
+    <div class="text-xxs full pd-05">YawMotorServiced - @Model.YawMotorServiced</div>
+    <br />
+
+    <div class="text-xxs full bold-600 pd-05 underline"><u>Job Date and Time</u></div>
+    <div class="text-xxs full pd-05">@Model.JobDate.ToString()</div>
+    <br />
+</div>
+<div class="box full dfb align-center gap-10 mt-3">
+    <a href="@Url.Action("Edit", "Jobs", new { id = Model.TurbineID })">
+        <button class="xxxs pd-12 pdx-2 fit whitespace-nowrap">
+            <i data-lucide="square-pen" style="height: 18px;"></i> Edit
+        </button>
+    </a>
+    <a href="@Url.Action("Index", "Jobs")">
+        <button class="xxxs pd-12 pdx-2 fit outline-black whitespace-nowrap">
+            Back To List
+        </button>
+    </a>
+</div>
