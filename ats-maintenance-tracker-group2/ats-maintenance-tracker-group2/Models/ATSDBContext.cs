@@ -23,5 +23,7 @@ namespace ats_maintenance_tracker_group2.Models
         {
             return new ATSDBContext();
         }
+
+        public System.Data.Entity.DbSet<ats_maintenance_tracker_group2.Models.Staff> Staffs { get; set; }
     }
 }
