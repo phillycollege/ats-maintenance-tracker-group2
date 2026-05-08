@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -80,6 +81,55 @@ namespace ats_maintenance_tracker_group2.Controllers {
             } else {
                 return RedirectToAction("Login", "Account");
             }
+        }
+
+        public ActionResult UpdateStatus(int? id) {
+            if (Request.IsAuthenticated) {
+                var staff = db.Users.Find(User.Identity.GetUserId());
+                if (id == null) {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Job job = db.Jobs
+                    .Include(j => j.Staff)
+                    .Include(j => j.WindFarm)
+                    .Include(j => j.Turbine)
+                    .ToList().Find(j => j.JobID == id);
+
+                if (job == null) {
+                    return HttpNotFound();
+                }
+                UpdateJobStatusViewModel updateJobStatusViewModel = new UpdateJobStatusViewModel() {
+                    JobID = job.JobID,
+                    FarmName = job.WindFarm.FarmName,
+                    TurbineId = job.TurbineID,
+                    JobType = job.JobType,
+                    JobCompleteStatus = job.JobCompleteStatus
+                };
+                return View(updateJobStatusViewModel);
+            } else {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateStatus(UpdateJobStatusViewModel model) {
+            if (!ModelState.IsValid) {
+                return View(model);
+            }
+
+            // Find the job in the database
+            var job = db.Jobs.Find(model.JobID);
+
+            if (job == null) {
+                return HttpNotFound();
+            }
+
+            // Update the status and save changes
+            job.JobCompleteStatus = model.JobCompleteStatus;
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int? id) {

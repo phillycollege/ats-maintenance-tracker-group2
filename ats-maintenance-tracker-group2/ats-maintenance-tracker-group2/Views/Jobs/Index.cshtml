@@ -48,7 +48,7 @@
                         } else {
                             <div class="box full dfb gap-10">
                                 @Html.ActionLink("Details", "Details", new { id = item.JobID }, new { @class = "box fit visible-link accent-color" }) |
-                                @Html.ActionLink("Update Status", "Details", new { id = item.JobID }, new { @class = "box fit visible-link accent-color" })
+                                @Html.ActionLink("Update Status", "UpdateStatus", new { id = item.JobID }, new { @class = "box fit visible-link accent-color" })
                             </div>
                         }
                     </td>
