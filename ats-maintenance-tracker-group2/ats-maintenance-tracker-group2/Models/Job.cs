@@ -20,7 +20,7 @@ namespace ats_maintenance_tracker_group2.Models
         public bool GearboxServiced { get; set; }
         public bool YawMotorServiced { get; set; }
         public bool InternalPassengerLiftServiced { get; set; }
-        public string JobCompleteStatus { get; set; }
+        public string JobCompleteStatus { get; set; } // Awaiting Engineer
 
         //Navigational Properties
         [ForeignKey("WindFarm")]

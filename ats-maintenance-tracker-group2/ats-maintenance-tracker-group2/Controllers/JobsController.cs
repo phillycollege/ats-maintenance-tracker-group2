@@ -1,0 +1,65 @@
+﻿using ats_maintenance_tracker_group2.Models;
+using Microsoft.AspNet.Identity;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Reflection;
+using System.Web;
+using System.Web.Mvc;
+
+namespace ats_maintenance_tracker_group2.Controllers
+{
+    public class JobsController : Controller {
+        // database connection context
+        private ATSDBContext db = new ATSDBContext();
+        
+        // GET: Jobs
+        public ActionResult Index() {
+            if (Request.IsAuthenticated) {
+                var staff = db.Users.Find(User.Identity.GetUserId());
+
+                if (staff.EmploymentRole == "CallHandler" || staff.EmploymentRole == "Manager") {
+                    // can view all jobs
+                    var jobs = db.Jobs
+                        .Include(j => j.Staff)
+                        .Include(j => j.WindFarm)
+                        .Include(j => j.Turbine)
+                        .ToList();
+
+                    return View(jobs);
+                } else {
+                    // engineer
+                    // can view ALL THEIR OWN jobs
+                    var jobs = db.Jobs
+                        .Include(j => j.Staff)
+                        .Include(j => j.WindFarm)
+                        .Include(j => j.Turbine)
+                        .ToList().Find(j => j.StaffID == staff.StaffID);
+
+                    return View(jobs);
+                }
+            } else {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+        // GET: Jobs/Details/1
+        public ActionResult Details (int? id) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Job job = db.Jobs
+                .Include(j => j.Staff)
+                .Include(j => j.WindFarm)
+                .Include(j => j.Turbine)
+                .ToList().Find(j => j.JobID == id);
+
+            if (job == null) {
+                return HttpNotFound();
+            }
+            return View(job);
+        }
+    }
+}
