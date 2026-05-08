@@ -17,7 +17,7 @@ namespace ats_maintenance_tracker_group2.Controllers
         // GET: Staffs
         public ActionResult Index()
         {
-            return View(db.Staffs.ToList());
+            return View(db.Users.ToList());
         }
 
         // GET: Staffs/Details/5
@@ -27,7 +27,7 @@ namespace ats_maintenance_tracker_group2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Staff staff = db.Staffs.Find(id);
+            Staff staff = db.Users.Find(id);
             if (staff == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace ats_maintenance_tracker_group2.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Staffs.Add(staff);
+                db.Users.Add(staff);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace ats_maintenance_tracker_group2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Staff staff = db.Staffs.Find(id);
+            Staff staff = db.Users.Find(id);
             if (staff == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace ats_maintenance_tracker_group2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Staff staff = db.Staffs.Find(id);
+            Staff staff = db.Users.Find(id);
             if (staff == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace ats_maintenance_tracker_group2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Staff staff = db.Staffs.Find(id);
-            db.Staffs.Remove(staff);
+            Staff staff = db.Users.Find(id);
+            db.Users.Remove(staff);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
