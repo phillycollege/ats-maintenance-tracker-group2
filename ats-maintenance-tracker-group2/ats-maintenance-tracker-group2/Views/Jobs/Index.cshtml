@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<ats_maintenance_tracker_group2.Models.Job>
-
 @{
     ViewBag.Title = "Jobs";
 }
@@ -27,7 +26,8 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model) {
+            @foreach (var item in Model)
+            {
                 <tr>
                     <td class='name'>@Html.DisplayFor(modelItem => item.WindFarm.FarmName)</td>
                     <td>@Html.DisplayFor(modelItem => item.JobType)</td>
