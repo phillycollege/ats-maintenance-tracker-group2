@@ -35,6 +35,16 @@
             <div class="text-m bold-700 full">Jobs</div>
         </div>
     </a>
+    @if (Model.EmploymentRole == "Engineer") { //235, 204, 52
+        <a href="@Url.Action("Index", "Shifts")" class="box fit" style="min-width: 350px;">
+            <div class="navigation-card" style="background: rgba(235, 204, 52, 0.376);">
+                <div class="navigation-card-icon" style="background: rgba(235, 204, 52);">
+                    <i data-lucide="calendar-clock"></i>
+                </div>
+                <div class="text-m bold-700 full">My Shifts</div>
+            </div>
+        </a>
+    }
     @if (Model.EmploymentRole == "Manager") {
         <a href="@Url.Action("Index", "Shifts")" class="box fit" style="min-width: 350px;">
             <div class="navigation-card" style="background: rgba(255, 94, 94, 0.376);">
