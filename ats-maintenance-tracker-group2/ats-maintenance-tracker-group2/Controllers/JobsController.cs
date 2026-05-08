@@ -63,5 +63,28 @@ namespace ats_maintenance_tracker_group2.Controllers
             }
             return View(job);
         }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Job job = db.Jobs.Find(id);
+
+            if (job == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Dropdowns (important for foreign keys)
+            ViewBag.StaffID = new SelectList(db.Users, "StaffID", "FullName", job.StaffID);
+            ViewBag.WindFarmID = new SelectList(db.WindFarms, "FarmID", "FarmName", job.WindFarmID);
+            ViewBag.TurbineID = new SelectList(db.Turbines, "TurbineID", "TurbineModel", job.TurbineID);
+
+            return View(job);
+        }
+
     }
 }
