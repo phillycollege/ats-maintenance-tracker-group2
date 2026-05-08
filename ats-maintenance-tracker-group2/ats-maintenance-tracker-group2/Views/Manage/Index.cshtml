@@ -1,9 +1,57 @@
 ﻿@model ats_maintenance_tracker_group2.Models.IndexViewModel
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Account Settings";
 }
 
-<main aria-labelledby="title">
+<br />
+<div class="box full dfb column">
+    <div class="text-xl full bold-600 pd-05">Account Settings</div>
+    <br />
+    <div class="text-xxs pd-05 text-success">@ViewBag.StatusMessage</div>
+
+    <div class="text-s full bold-600 pd-05 underline">Change your account settings</div>
+    @if (Model.HasPassword) {
+        <a href="@Url.Action("ChangePassword", "Manage")">
+            <button type="button" class="xxxs pd-12 pdx-2 fit whitespace-nowrap">
+                Change Your Password
+            </button>
+        </a>
+    } else {
+        <a href="@Url.Action("SetPassword", "Manage")">
+            <button type="button" class="xxxs pd-12 pdx-2 fit whitespace-nowrap">
+                Create Password
+            </button>
+        </a>
+    }
+
+    <br />
+    <div class="text-s full bold-600 pd-05 underline">Manage Logins</div>
+    <div class="text-xxs full pd-05">@Model.Logins.Count Login(s)</div>
+    <a href="@Url.Action("ManageLogins", "Manage")">
+        <button type="button" class="xxxs pd-12 pdx-2 fit outline-black whitespace-nowrap">
+            Manage Logins
+        </button>
+    </a>
+
+    <br />
+    <div class="text-s full bold-600 pd-05 underline">Sign out of your account</div>
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="xxxs pd-12 pdx-2 fit outline-black whitespace-nowrap logout">
+            Log out
+        </button>
+    }
+
+    <br />
+    <div class="text-s full bold-600 pd-05 underline">Two-Factor Authentication</div>
+    <div class="text-xxs full pd-05">
+        There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+        for details on setting up this ASP.NET application to support two-factor authentication.
+    </div>
+</div>
+
+
+<!--<main aria-labelledby="title">
     <h2 id="title">@ViewBag.Title.</h2>
 
     <p class="text-success">@ViewBag.StatusMessage</p>
@@ -13,31 +61,26 @@
         <dl class="dl-horizontal">
             <dt>Password:</dt>
             <dd>
-                [
-                @if (Model.HasPassword)
-                {
+                @if (Model.HasPassword) {
                     @Html.ActionLink("Change your password", "ChangePassword")
-                }
-                else
-                {
+                } else {
                     @Html.ActionLink("Create", "SetPassword")
                 }
-                ]
             </dd>
             <dt>External Logins:</dt>
             <dd>
                 @Model.Logins.Count [
                 @Html.ActionLink("Manage", "ManageLogins") ]
-            </dd>
+            </dd>-->
             @*
                 Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-                
+
                 See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
                     for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-                
+
                 Uncomment the following block after you have set up two-factor authentication
             *@
-            @*  
+            @*
                 <dt>Phone Number:</dt>
                 <dd>
                     @(Model.PhoneNumber ?? "None")
@@ -57,12 +100,12 @@
                     }
                 </dd>
             *@
-            <dt>Two-Factor Authentication:</dt>
+            <!--<dt>Two-Factor Authentication:</dt>
             <dd>
                 <p>
                     There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
                     for details on setting up this ASP.NET application to support two-factor authentication.
-                </p>
+                </p>-->
                 @*@if (Model.TwoFactor)
                     {
                         using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { role = "form" }))
@@ -83,7 +126,7 @@
                             </text>
                         }
                     }*@
-            </dd>
+            <!--</dd>
         </dl>
     </div>
-</main>
+</main>-->
