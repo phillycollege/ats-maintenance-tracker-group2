@@ -1,0 +1,50 @@
+﻿
+@model IEnumerable<ats_maintenance_tracker_group2.Models.Shift>
+
+@{
+    ViewBag.Title = "My Shifts";
+}
+
+<div class="box full dfb align-center pd-1 mb-3">
+    <div class="text-xxl bold-600 full">My Shifts</div>
+</div>
+
+<div class="table-container">
+    <table class="custom-table">
+        <thead>
+            <tr id="head-row">
+                <th>Shift Type</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+                <th>Sunday</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => item.ShiftType)</td>
+
+                    <td>@(item.Mon ? "✔" : "-")</td>
+                    <td>@(item.Tue ? "✔" : "-")</td>
+                    <td>@(item.Wed ? "✔" : "-")</td>
+                    <td>@(item.Thu ? "✔" : "-")</td>
+                    <td>@(item.Fri ? "✔" : "-")</td>
+                    <td>@(item.Sat ? "✔" : "-")</td>
+                    <td>@(item.Sun ? "✔" : "-")</td>
+
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.ShiftRecordID },
+                        new { @class = "box fit visible-link accent-color" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
