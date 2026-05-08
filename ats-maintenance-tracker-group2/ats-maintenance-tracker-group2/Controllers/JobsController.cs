@@ -35,8 +35,10 @@ namespace ats_maintenance_tracker_group2.Controllers
                     var jobs = db.Jobs
                         .Include(j => j.Staff)
                         .Include(j => j.WindFarm)
-                        .Include(j => j.Turbine)
-                        .ToList().Find(j => j.StaffID == staff.StaffID);
+                        .Include(j => j.Turbine)          
+                        .Where(j => j.StaffID == staff.StaffID)
+                        .ToList();
+
 
                     return View(jobs);
                 }
