@@ -15,12 +15,12 @@ namespace ats_maintenance_tracker_group2.Models
         public DateTime JobDate { get; set; }
         public string JobTime { get; set; } //Early 07:00 - 14:00, Late 14:00 - 21:00
         public string JobType { get; set; } // Service or Fault Job
-        public string FaultDescription { get; set; }
+        public string FaultDescription { get; set; } 
         public bool MainGeneratorServiced { get; set; }
         public bool GearboxServiced { get; set; }
         public bool YawMotorServiced { get; set; }
         public bool InternalPassengerLiftServiced { get; set; }
-        public string JobCompleteStatus { get; set; } // Awaiting Engineer
+        public string JobCompleteStatus { get; set; } // Awaiting Engineer or Job Completed
 
         //Navigational Properties
         [ForeignKey("WindFarm")]

@@ -13,7 +13,7 @@ namespace ats_maintenance_tracker_group2.Models
         public string TurbineID { get; set; }
         public string TurbineMake { get; set; }
         public string TurbineModel { get; set; }
-        public int RuntimeHours { get; set; }
+        public int RuntimeHours { get; set; }// update to 0 when serviced
         public bool IsHighWinds { get; set; }
         public string OperationalStatus { get; set; } // Active, Needs Service, Fault
         public string Coordinates { get; set; }
