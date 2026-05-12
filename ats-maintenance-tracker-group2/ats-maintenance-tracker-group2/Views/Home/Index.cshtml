@@ -1,11 +1,82 @@
-﻿@{
+﻿@model ats_maintenance_tracker_group2.Models.Staff
+@{
     ViewBag.Title = "Home Page";
 }
 
 
-<div class="text-xxl full pd-1">Hello <i data-lucide="menu"></i></div>
-
+<div class="text-l full pd-05 bold-600">Hello @Model.FirstName @Model.LastName</div>
+<div class="text-s grey-5 full">@Model.EmploymentRole</div>
 <br>
+
+<div class="box full dfb gap-10 wrap no-select">
+    @if (Model.EmploymentRole == "CallHandler" || Model.EmploymentRole == "Manager")
+    {
+        <a href="@Url.Action("Index", "WindFarms")" class="box fit" style="min-width: 350px;">
+            <div class="navigation-card" style="background: rgba(132, 255, 61, 0.376);">
+                <div class="navigation-card-icon" style="background: rgb(132, 255, 61);">
+                    <i data-lucide="tractor"></i>
+                </div>
+                <div class="text-m bold-700 full">WindFarms</div>
+            </div>
+
+        </a>
+        <a href="@Url.Action("Index", "Turbines")" class="box fit" style="min-width: 350px;">
+            <div class="navigation-card" style="background: rgba(166, 98, 255, 0.376);">
+                <div class="navigation-card-icon" style="background: rgba(166, 98, 255);">
+                    <i data-lucide="fan"></i>
+                </div>
+                <div class="text-m bold-700 full">Turbines</div>
+            </div>
+        </a>
+
+        <a href="@Url.Action("Index", "Simulation")" class="box fit" style="min-width: 350px;">
+            <div class="navigation-card" style="background: rgba(255, 156, 18, 0.376);">
+                <div class="navigation-card-icon" style="background: rgb(255, 156, 18);">
+                    <i data-lucide="orbit"></i>
+                </div>
+                <div class="text-m bold-700 full">Simulation</div>
+            </div>
+        </a>
+
+
+            }
+            <a href="@Url.Action("Index", "Jobs")" class="box fit" style="min-width: 350px;">
+                <div class="navigation-card" style="background: rgba(255, 106, 188, 0.376);">
+                    <div class="navigation-card-icon" style="background: rgba(255, 106, 188);">
+                        <i data-lucide="pickaxe"></i>
+                    </div>
+                    <div class="text-m bold-700 full">Jobs</div>
+                </div>
+            </a>
+            @if (Model.EmploymentRole == "Engineer")
+            { //235, 204, 52
+                <a href="@Url.Action("Index", "Shifts")" class="box fit" style="min-width: 350px;">
+                    <div class="navigation-card" style="background: rgba(235, 204, 52, 0.376);">
+                        <div class="navigation-card-icon" style="background: rgba(235, 204, 52);">
+                            <i data-lucide="calendar-clock"></i>
+                        </div>
+                        <div class="text-m bold-700 full">My Shifts</div>
+                    </div>
+                </a>
+            }
+            @if (Model.EmploymentRole == "Manager")
+            {
+                <a href="@Url.Action("Index", "Shifts")" class="box fit" style="min-width: 350px;">
+                    <div class="navigation-card" style="background: rgba(255, 94, 94, 0.376);">
+                        <div class="navigation-card-icon" style="background: rgba(255, 94, 94);">
+                            <i data-lucide="calendar-clock"></i>
+                        </div>
+                        <div class="text-m bold-700 full">Engineer Shifts</div>
+                    </div>
+                </a>
+            }
+    </div>
+
+
+
+<div class="text-xxl full pd-1">Hello <i data-lucide="menu"></i></div>
+<br>
+
 
 <div class="box full dfb align-center gap-10">
     <div class="box fit dfb align-center gap-10">

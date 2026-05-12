@@ -11,49 +11,36 @@ using ats_maintenance_tracker_group2.Models;
 namespace ats_maintenance_tracker_group2.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
-    {
+    public class ManageController : Controller {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ManageController()
-        {
-        }
+        public ManageController() {}
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        {
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager) {
             UserManager = userManager;
             SignInManager = signInManager;
         }
 
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
+        public ApplicationSignInManager SignInManager {
+            get {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set 
-            { 
+            } private set { 
                 _signInManager = value; 
             }
         }
 
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
+        public ApplicationUserManager UserManager {
+            get {
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
+            } private set {
                 _userManager = value;
             }
         }
 
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
-        {
+        public async Task<ActionResult> Index(ManageMessageId? message) {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -64,8 +51,7 @@ namespace ats_maintenance_tracker_group2.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
-            {
+            var model = new IndexViewModel {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
@@ -73,6 +59,13 @@ namespace ats_maintenance_tracker_group2.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff() {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Login", "Account");
         }
 
         //

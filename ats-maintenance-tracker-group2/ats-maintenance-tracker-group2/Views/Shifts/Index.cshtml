@@ -1,0 +1,45 @@
+﻿
+@model IEnumerable<ats_maintenance_tracker_group2.Models.Shift>
+
+@{
+    ViewBag.Title = "My Shifts";
+}
+
+<div class="box full dfb column gap-5 pd-1 mb-3">
+    <div class="text-xxl bold-600 full">My Shifts</div>
+    <div class="text-xs full">Shift Type - @Model.First().ShiftType</div>
+    @if (@Model.First().ShiftType == "Early") {
+        <div class="text-xs full">Shift Time - 7:00am - 2:00pm</div>
+    } else {
+        <div class="text-xs full">Shift Time - 2:00pm - 9:00pm</div>
+    }
+</div>
+
+<div class="table-container">
+    <table class="custom-table">
+        <thead>
+            <tr id="head-row">
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+                <th>Sunday</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>@(item.Mon ? "✔" : "Day Off")</td>
+                    <td>@(item.Tue ? "✔" : "Day Off")</td>
+                    <td>@(item.Wed ? "✔" : "Day Off")</td>
+                    <td>@(item.Thu ? "✔" : "Day Off")</td>
+                    <td>@(item.Fri ? "✔" : "Day Off")</td>
+                    <td>@(item.Sat ? "✔" : "Day Off")</td>
+                    <td>@(item.Sun ? "✔" : "Day Off")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

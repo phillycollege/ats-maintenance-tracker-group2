@@ -1,0 +1,76 @@
+﻿@model ats_maintenance_tracker_group2.Models.WindFarm
+
+@{
+    ViewBag.Title = "Create WindFarm";
+}
+
+<div class="text-xxl bold-600 full">
+    Create WindFarm
+</div>
+<br />
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+    <div class="box full">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="box full pd-05">
+            @Html.EditorFor(model => model.FarmID, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Farm Id" } })
+            @Html.ValidationMessageFor(model => model.FarmID, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
+
+
+        <div class="box full pd-05">
+            @Html.EditorFor(model => model.FarmName, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "FarmName" } })
+            @Html.ValidationMessageFor(model => model.FarmName, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
+
+
+        <div class="box full pd-05">
+            @Html.EditorFor(model => model.Address1, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Address1" } })
+            @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
+
+
+        <div class="box full pd-05">
+            @Html.EditorFor(model => model.Address2, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Address2" } })
+            @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
+
+
+        <div class="box full pd-05">
+            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "City" } })
+            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
+
+
+        <div class="box full pd-05">
+            @Html.EditorFor(model => model.Postcode, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Postcode" } })
+            @Html.ValidationMessageFor(model => model.Postcode, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
+
+
+        <div class="box full pd-05">
+            @Html.EditorFor(model => model.Region, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Region" } })
+            @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
+
+        <div class="box full dfb align-center gap-10 mt-1">
+            <button type="submit" class="xxxs pd-12 pdx-2 fit whitespace-nowrap">
+                <i data-lucide="square-pen" style="height: 18px;"></i> Save
+            </button>
+
+            <a href="@Url.Action("Index", "WindFarms")">
+                <button type="button" class="xxxs pd-12 pdx-2 fit outline-black whitespace-nowrap">
+                    Back To List
+                </button>
+            </a>
+        </div>
+    </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

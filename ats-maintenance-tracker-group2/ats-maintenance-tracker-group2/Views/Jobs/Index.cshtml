@@ -1,0 +1,59 @@
+﻿@model ats_maintenance_tracker_group2.Utilities.AllJobsPageValues
+@{
+    ViewBag.Title = "Jobs";
+}
+
+<div class="box full dfb align-center pd-1 mb-3">
+    @if (Model.staff.EmploymentRole == "Engineer") {
+        <div class="text-xxl bold-600 full">@Model.staff.FirstName @Model.staff.LastName's Jobs</div>
+    } else {
+        <div class="text-xxl bold-600 full">All Jobs</div>
+        <a href="@Url.Action("Create", "Jobs")">
+            <button type="submit" class="xxxs pd-12 pdx-2 fit whitespace-nowrap">
+                <i data-lucide="plus" style="height: 18px;"></i> Create New Job
+            </button>
+        </a>
+    }
+</div>
+
+<div class="table-container">
+    <table class="custom-table">
+        <thead>
+            <tr id='head-row'>
+                <th>Farm Name</th>
+                <th>Job Type</th>
+                <th>Job Time</th>
+                <th>Job Complete Status</th>
+                <th>Engineer Assigned</th>
+                <th>Turbine ID</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.jobs) {
+                <tr>
+                    <td class='name'>@Html.DisplayFor(modelItem => item.WindFarm.FarmName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.JobType)</td>
+                    <td>@Html.DisplayFor(modelItem => item.JobTime)</td>
+                    <td>@Html.DisplayFor(modelItem => item.JobCompleteStatus)</td>
+                    <td>@item.Staff.FirstName @item.Staff.LastName</td>
+                    <td>@Html.DisplayFor(modelItem => item.TurbineID)</td>
+                    <td>
+                        @if (Model.staff.EmploymentRole == "CallHandler" || Model.staff.EmploymentRole == "Manager") {
+                            <div class="box full dfb gap-10">
+                                @Html.ActionLink("Edit", "Edit", new { id = item.JobID }, new { @class = "box fit visible-link accent-color" }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.JobID }, new { @class = "box fit visible-link accent-color" }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.JobID }, new { @class = "box fit visible-link accent-color" })
+                            </div>
+                        } else {
+                            <div class="box full dfb gap-10">
+                                @Html.ActionLink("Details", "Details", new { id = item.JobID }, new { @class = "box fit visible-link accent-color" }) |
+                                @Html.ActionLink("Update Status", "UpdateStatus", new { id = item.JobID }, new { @class = "box fit visible-link accent-color" })
+                            </div>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

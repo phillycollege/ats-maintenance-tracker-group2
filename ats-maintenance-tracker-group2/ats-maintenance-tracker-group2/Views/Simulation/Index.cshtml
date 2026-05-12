@@ -1,0 +1,45 @@
+﻿
+
+
+@{
+    ViewData["Title"] = "Simulation";
+}
+
+<h2>Simulation</h2>
+
+<!-- HOURS INPUT -->
+
+<form asp-action="Index" method
+    <div>
+        <label>Hours:</label>
+        <input type="number" name="hours" class="form-control" required />
+    </div>
+
+    <br />
+
+    <!-- TURBINE DROPDOWN -->
+    <div>
+        <label>Select Turbine:</label>
+        <select name="turbine" class="form-control">
+            <option value="Turbine 1">Turbine 1</option>
+            <option value="Turbine 2">Turbine 2</option>
+            <option value="Turbine 3">Turbine 3</option>
+        </select>
+    </div>
+
+    <br />
+
+    <!-- UPDATE BUTTON -->
+    <button type="submit" class="btn btn-primary">Update</button>
+
+</form>
+
+<br />
+
+<!-- SHOW RESULT -->
+@if (ViewBag.Result != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.Result
+    </div>
+}

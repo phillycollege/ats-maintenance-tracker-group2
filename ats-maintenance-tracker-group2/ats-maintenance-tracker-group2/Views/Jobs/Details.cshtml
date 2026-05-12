@@ -1,0 +1,46 @@
+﻿@model ats_maintenance_tracker_group2.Utilities.JobDetailsPageValues
+
+@{
+    ViewBag.Title = "Job Details";
+}
+
+<br />
+<div class="text-xxxs grey-5">@Model.job.JobType Job Details</div>
+
+<div class="box full dfb column">
+    <div class="text-xl full bold-600 pd-05">@Model.job.WindFarm.FarmName - @Model.job.TurbineID</div>
+    <div class="text-xxs full pd-05">Job Status - @Model.job.JobCompleteStatus</div>
+    <div class="text-xs full pd-05 line-height-14">@Model.job.FaultDescription</div>
+    <br />
+
+    <div class="text-xxs full bold-600 pd-05 underline"><u>Job Info</u></div>
+    <div class="text-xxs full pd-05">GearboxServiced - @Model.job.GearboxServiced</div>
+    <div class="text-xxs full pd-05">InternalPassengerLiftServiced - @Model.job.InternalPassengerLiftServiced</div>
+    <div class="text-xxs full pd-05">MainGeneratorServiced - @Model.job.MainGeneratorServiced</div>
+    <div class="text-xxs full pd-05">YawMotorServiced - @Model.job.YawMotorServiced</div>
+    <br />
+
+    <div class="text-xxs full bold-600 pd-05 underline"><u>Job Date and Time</u></div>
+    <div class="text-xxs full pd-05">@Model.job.JobDate.ToString()</div>
+    <br />
+</div>
+<div class="box full dfb align-center gap-10 mt-3">
+    @if (Model.staff.EmploymentRole != "Engineer") {
+        <a href="@Url.Action("Edit", "Jobs", new { id = Model.job.TurbineID })">
+            <button class="xxxs pd-12 pdx-2 fit whitespace-nowrap">
+                <i data-lucide="square-pen" style="height: 18px;"></i> Edit
+            </button>
+        </a>
+    } else {
+        <a href="@Url.Action("UpdateStatus", "Jobs", new { id = Model.job.JobID })">
+            <button class="xxxs pd-12 pdx-2 fit whitespace-nowrap">
+                <i data-lucide="pickaxe" style="height: 18px;"></i> Update Job Status
+            </button>
+        </a>
+    }
+    <a href="@Url.Action("Index", "Jobs")">
+        <button class="xxxs pd-12 pdx-2 fit outline-black whitespace-nowrap">
+            Back To List
+        </button>
+    </a>
+</div>

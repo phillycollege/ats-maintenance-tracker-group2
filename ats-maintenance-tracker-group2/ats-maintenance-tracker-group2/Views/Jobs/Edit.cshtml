@@ -1,0 +1,55 @@
+﻿@model ats_maintenance_tracker_group2.Models.Job
+
+@{
+    ViewBag.Title = "Update Job";
+}
+
+<h2>Update Job</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.JobID)
+
+    if (Model.JobType == "Fault")
+    {
+        <div>
+            <label>Fault Description</label>
+            @Html.EditorFor(m => m.FaultDescription)
+        </div>
+    }
+
+    <div>
+        <label>Main Generator Serviced</label>
+        @Html.CheckBoxFor(m => m.MainGeneratorServiced)
+    </div>
+
+    <div>
+        <label>Gearbox Serviced</label>
+        @Html.CheckBoxFor(m => m.GearboxServiced)
+    </div>
+
+    <div>
+        <label>Yaw Motor Serviced</label>
+        @Html.CheckBoxFor(m => m.YawMotorServiced)
+    </div>
+
+    <div>
+        <label>Lift Serviced</label>
+        @Html.CheckBoxFor(m => m.InternalPassengerLiftServiced)
+    </div>
+
+    <div>
+        <label>Status</label>
+        @Html.DropDownListFor(m => m.JobCompleteStatus,
+            new SelectList(new[]
+            {
+                "In Progress",
+                "Completed"
+            }))
+    </div>
+
+    <br />
+
+    <button type="submit">Update Job</button>
+}
