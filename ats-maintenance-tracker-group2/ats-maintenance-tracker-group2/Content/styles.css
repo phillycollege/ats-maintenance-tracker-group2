@@ -246,17 +246,17 @@ textarea.pdx-9, input.pdx-9, button.pdx-9 { padding-left: 90px; padding-right: 9
 
 [class*="text-"].color-white { color: #fff; }
 
-div.mw-200, button.mw-200, textarea.mw-200, input.mw-200, .htv.mw-200, .box.mw-200, [class*="text-"].mw-200 { max-width: 200px; }
-div.mw-300, button.mw-300, textarea.mw-300, input.mw-300, .htv.mw-300, .box.mw-300, [class*="text-"].mw-300 { max-width: 300px; }
-div.mw-400, button.mw-400, textarea.mw-400, input.mw-400, .htv.mw-400, .box.mw-400, [class*="text-"].mw-400 { max-width: 400px; }
-div.mw-500, button.mw-500, textarea.mw-500, input.mw-500, .htv.mw-500, .box.mw-500, [class*="text-"].mw-500 { max-width: 500px; }
-div.mw-600, button.mw-600, textarea.mw-600, input.mw-600, .htv.mw-600, .box.mw-600, [class*="text-"].mw-600 { max-width: 600px; }
-div.mw-700, button.mw-700, textarea.mw-700, input.mw-700, .htv.mw-700, .box.mw-700, [class*="text-"].mw-700 { max-width: 700px; }
-div.mw-800, button.mw-800, textarea.mw-800, input.mw-800, .htv.mw-800, .box.mw-800, [class*="text-"].mw-800 { max-width: 800px; }
-div.mw-900, button.mw-900, textarea.mw-900, input.mw-900, .htv.mw-900, .box.mw-900, [class*="text-"].mw-900 { max-width: 900px; }
-div.mw-1000, button.mw-1000, textarea.mw-1000, input.mw-1000, .htv.mw-1000, .box.mw-1000, [class*="text-"].mw-1000 { max-width: 1000px; }
-div.mw-1100, button.mw-1100, textarea.mw-1100, input.mw-1100, .htv.mw-1100, .box.mw-1100, [class*="text-"].mw-1100 { max-width: 1100px; }
-div.mw-1200, button.mw-1200, textarea.mw-1200, input.mw-1200, .htv.mw-1200, .box.mw-1200, [class*="text-"].mw-1200 { max-width: 1200px; }
+select.mw-200, div.mw-200, button.mw-200, textarea.mw-200, input.mw-200, .htv.mw-200, .box.mw-200, [class*="text-"].mw-200 { max-width: 200px; }
+select.mw-300, div.mw-300, button.mw-300, textarea.mw-300, input.mw-300, .htv.mw-300, .box.mw-300, [class*="text-"].mw-300 { max-width: 300px; }
+select.mw-400, div.mw-400, button.mw-400, textarea.mw-400, input.mw-400, .htv.mw-400, .box.mw-400, [class*="text-"].mw-400 { max-width: 400px; }
+select.mw-500, div.mw-500, button.mw-500, textarea.mw-500, input.mw-500, .htv.mw-500, .box.mw-500, [class*="text-"].mw-500 { max-width: 500px; }
+select.mw-600, div.mw-600, button.mw-600, textarea.mw-600, input.mw-600, .htv.mw-600, .box.mw-600, [class*="text-"].mw-600 { max-width: 600px; }
+select.mw-700, div.mw-700, button.mw-700, textarea.mw-700, input.mw-700, .htv.mw-700, .box.mw-700, [class*="text-"].mw-700 { max-width: 700px; }
+select.mw-800, div.mw-800, button.mw-800, textarea.mw-800, input.mw-800, .htv.mw-800, .box.mw-800, [class*="text-"].mw-800 { max-width: 800px; }
+select.mw-900, div.mw-900, button.mw-900, textarea.mw-900, input.mw-900, .htv.mw-900, .box.mw-900, [class*="text-"].mw-900 { max-width: 900px; }
+select.mw-1000, div.mw-1000, button.mw-1000, textarea.mw-1000, input.mw-1000, .htv.mw-1000, .box.mw-1000, [class*="text-"].mw-1000 { max-width: 1000px; }
+select.mw-1100, div.mw-1100, button.mw-1100, textarea.mw-1100, input.mw-1100, .htv.mw-1100, .box.mw-1100, [class*="text-"].mw-1100 { max-width: 1100px; }
+select.mw-1200, div.mw-1200, button.mw-1200, textarea.mw-1200, input.mw-1200, .htv.mw-1200, .box.mw-1200, [class*="text-"].mw-1200 { max-width: 1200px; }
 
 .box.cursor-pointer, [class*="text-"].cursor-pointer { cursor: pointer; }
 
@@ -533,7 +533,8 @@ select {
 	border-radius: 15px;
 	outline: none;
 }
-select.xxxs {
+select.full { width: 100%; }
+select.xxxs { 
 	font-size: 0.9rem;
 }
 

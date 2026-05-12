@@ -56,6 +56,48 @@ namespace ats_maintenance_tracker_group2.Controllers {
             }
         }
 
+        // AJAX: Get turbines for selected wind farm
+        [HttpGet]
+        public JsonResult GetTurbines(string farmId) {
+            // gets all turbines in a particular windfarm using the farmId
+            var turbines = db.Turbines
+                .Where(t => t.FarmID == farmId)
+                .Where(t => t.OperationalStatus == "1 Operational")
+                .Select(t => new {
+                    Value = t.TurbineID,
+                    Text = t.TurbineID
+                })
+                .ToList();
+
+            return Json(turbines, JsonRequestBehavior.AllowGet);
+        }
+
+        // GET: Jobs/CreateFaultJob
+        public ActionResult CreateFaultJob () {
+            if (Request.IsAuthenticated) {
+                var staff = db.Users.Find(User.Identity.GetUserId());
+
+                if (staff.EmploymentRole == "CallHandler") {
+                    var engineer = db.Users.Where(s => s.EmploymentRole == "Engineer").ToList().First();
+
+                    CreateFaultJobViewModel viewModel = new CreateFaultJobViewModel {
+                        WindFarms = db.WindFarms
+                            .Select(w => new SelectListItem {
+                                Value = w.FarmID,
+                                Text = w.FarmName
+                            }).ToList(),
+                        Turbines = new List<SelectListItem>()
+                    };
+
+                    return View(viewModel);
+                } else {
+                    return RedirectToAction("Index", "Home");
+                }
+            } else {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
         // GET: Jobs/Details/1
         public ActionResult Details(int? id) {
             if (Request.IsAuthenticated) {

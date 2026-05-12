@@ -20,6 +20,7 @@ namespace ats_maintenance_tracker_group2.Models
         public string City { get; set; }
         public string Postcode { get; set; }
         public decimal Salary { get; set; }
+
         public string EmploymentRole { get; set; } // Call Handler, Engineer or Manager
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Staff> manager)
