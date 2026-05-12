@@ -13,4 +13,9 @@ namespace ats_maintenance_tracker_group2.Utilities {
         public Staff staff;
         public Job job;
     }
+
+    public class HomePageValues {
+        public Staff staff;
+        public List<Job> incompleteJobs;
+    }
 }

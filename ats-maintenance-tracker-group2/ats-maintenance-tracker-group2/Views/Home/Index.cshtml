@@ -1,16 +1,14 @@
-﻿@model ats_maintenance_tracker_group2.Models.Staff
+﻿@model ats_maintenance_tracker_group2.Utilities.HomePageValues
 @{
     ViewBag.Title = "Home Page";
 }
 
-
-<div class="text-l full pd-05 bold-600">Hello @Model.FirstName @Model.LastName</div>
-<div class="text-s grey-5 full">@Model.EmploymentRole</div>
+<div class="text-l full pd-05 bold-600">Hello @Model.staff.FirstName @Model.staff.LastName</div>
+<div class="text-s grey-5 full">@Model.staff.EmploymentRole</div>
 <br>
 
 <div class="box full dfb gap-10 wrap no-select">
-    @if (Model.EmploymentRole == "CallHandler" || Model.EmploymentRole == "Manager")
-    {
+    @if (Model.staff.EmploymentRole == "CallHandler" || Model.staff.EmploymentRole == "Manager") {
         <a href="@Url.Action("Index", "WindFarms")" class="box fit" style="min-width: 350px;">
             <div class="navigation-card" style="background: rgba(132, 255, 61, 0.376);">
                 <div class="navigation-card-icon" style="background: rgb(132, 255, 61);">
@@ -37,155 +35,208 @@
                 <div class="text-m bold-700 full">Simulation</div>
             </div>
         </a>
-
-
-            }
-            <a href="@Url.Action("Index", "Jobs")" class="box fit" style="min-width: 350px;">
-                <div class="navigation-card" style="background: rgba(255, 106, 188, 0.376);">
-                    <div class="navigation-card-icon" style="background: rgba(255, 106, 188);">
-                        <i data-lucide="pickaxe"></i>
-                    </div>
-                    <div class="text-m bold-700 full">Jobs</div>
+    }
+    <a href="@Url.Action("Index", "Jobs")" class="box fit" style="min-width: 350px;">
+        <div class="navigation-card" style="background: rgba(255, 106, 188, 0.376);">
+            <div class="navigation-card-icon" style="background: rgba(255, 106, 188);">
+                <i data-lucide="pickaxe"></i>
+            </div>
+            <div class="text-m bold-700 full">Jobs</div>
+        </div>
+    </a>
+    @if (Model.staff.EmploymentRole == "Engineer") { //235, 204, 52
+        <a href="@Url.Action("Index", "Shifts")" class="box fit" style="min-width: 350px;">
+            <div class="navigation-card" style="background: rgba(235, 204, 52, 0.376);">
+                <div class="navigation-card-icon" style="background: rgba(235, 204, 52);">
+                    <i data-lucide="calendar-clock"></i>
                 </div>
-            </a>
-            @if (Model.EmploymentRole == "Engineer")
-            { //235, 204, 52
-                <a href="@Url.Action("Index", "Shifts")" class="box fit" style="min-width: 350px;">
-                    <div class="navigation-card" style="background: rgba(235, 204, 52, 0.376);">
-                        <div class="navigation-card-icon" style="background: rgba(235, 204, 52);">
-                            <i data-lucide="calendar-clock"></i>
-                        </div>
-                        <div class="text-m bold-700 full">My Shifts</div>
-                    </div>
-                </a>
-            }
-            @if (Model.EmploymentRole == "Manager")
-            {
-                <a href="@Url.Action("Index", "Shifts")" class="box fit" style="min-width: 350px;">
-                    <div class="navigation-card" style="background: rgba(255, 94, 94, 0.376);">
-                        <div class="navigation-card-icon" style="background: rgba(255, 94, 94);">
-                            <i data-lucide="calendar-clock"></i>
-                        </div>
-                        <div class="text-m bold-700 full">Engineer Shifts</div>
-                    </div>
-                </a>
-            }
-    </div>
-
-
-
-<div class="text-xxl full pd-1">Hello <i data-lucide="menu"></i></div>
-<br>
-
-
-<div class="box full dfb align-center gap-10">
-    <div class="box fit dfb align-center gap-10">
-        <div class="text-xxs visible-link">Dashboard</div>
-        <div class="text-xxs">/</div>
-    </div>
-    <div class="box fit dfb align-center gap-10" key={index}>
-        <div class="text-xxs whitespace-nowrap visible-link">Engineer</div>
-        <div class="text-xxs">/</div>
-    </div>
-    <div class="box fit dfb align-center gap-10" key={index}>
-        <div class="text-xxs whitespace-nowrap bold-600 accent-color">Dummy Engineer</div>
-        <!-- <div class="text-xxs">/</div> -->
-    </div>
+                <div class="text-m bold-700 full">My Shifts</div>
+            </div>
+        </a>
+    }
+    @if (Model.staff.EmploymentRole == "Manager") {
+        <a href="@Url.Action("Index", "Shifts")" class="box fit" style="min-width: 350px;">
+            <div class="navigation-card" style="background: rgba(255, 94, 94, 0.376);">
+                <div class="navigation-card-icon" style="background: rgba(255, 94, 94);">
+                    <i data-lucide="calendar-clock"></i>
+                </div>
+                <div class="text-m bold-700 full">Engineer Shifts</div>
+            </div>
+        </a>
+    }
 </div>
 
-<br>
+@if (Model.staff.EmploymentRole == "Engineer") {
+    <br />
+    <br />
+    <div class="text-l full pd-05 bold-600">My Assigned Jobs</div>
+    if (Model.incompleteJobs.Count < 1) {
+        <div class="text-s grey-5 full">You have no recent jobs assigned</div>
+    } else {
+        <div class="text-s grey-5 full">These are the jobs which you haven't completed</div>
+        <br>
+        <div class="table-container">
+            <table class="custom-table">
+                <thead>
+                    <tr id='head-row'>
+                        <th>Farm Name</th>
+                        <th>Job Type</th>
+                        <th>Job Time</th>
+                        <th>Job Complete Status</th>
+                        <th>Turbine ID</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.incompleteJobs) {
+                        <tr>
+                            <td class='name'>@Html.DisplayFor(modelItem => item.WindFarm.FarmName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.JobType)</td>
+                            <td>@Html.DisplayFor(modelItem => item.JobTime)</td>
+                            <td>@Html.DisplayFor(modelItem => item.JobCompleteStatus)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TurbineID)</td>
+                            <td>
+                                <div class="box full dfb gap-10">
+                                    @Html.ActionLink("Details", "Details", "Jobs", new { id = item.JobID }, new { @class = "box fit visible-link accent-color" }) |
+                                    @Html.ActionLink("Update Status", "UpdateStatus", "Jobs", new { id = item.JobID }, new { @class = "box fit visible-link accent-color" })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
 
-<div class="box full dfb gap-10 wrap">
-    <div class="card mw-400" style="padding: 15px;">
-        <div class="text-m full">Wind Farm 1</div>
-        <div class="text-xxs full">100HP</div>
+} else if (Model.staff.EmploymentRole == "CallHandler") {
+    <br />
+    <br />
+    <div class="text-l full pd-05 bold-600 mb-1">My Actions</div>
+    <div class="box full dfb gap-10 wrap no-select">
+        <a href="@Url.Action("CreateFaultJob", "Jobs")" class="box fit" style="min-width: 350px;">
+            <div class="navigation-card" style="background: rgba(192, 192, 192, 0.376); ">
+                <div class="navigation-card-icon" style="background: rgba(192, 192, 192); ">
+                    <i data-lucide="pickaxe"></i>
+                </div>
+                <div class="text-m bold-700 full">Create Fault Job</div>
+            </div>
+        </a>
     </div>
-    <div class="card mw-400" style="padding: 15px;">
-        <div class="text-m full">Wind Farm 1</div>
-        <div class="text-xxs full">100HP</div>
-    </div>
-    <div class="card mw-400" style="padding: 15px;">
-        <div class="text-m full">Wind Farm 1</div>
-        <div class="text-xxs full">100HP</div>
-    </div>
-</div>
+}
 
-<br>
 
-<div class="box full dfb gap-10 wrap">
-    <button class="xxs pd-12 pdx-2" onclick="showModal()">Click Me</button>
-    <button class="xxs pd-12 pdx-2 delete" onclick="showFailedModal('Failed to create fault job.')">Click Me</button>
-    <button class="xxs pd-12 pdx-2 outline-black">Click Me</button>
-    <button class="xxs pd-12 pdx-2 secondary" onclick="showSuccessModal('Fault Job created !')">Click Me</button>
-    <button class="xxs pd-12 pdx-2 logout">Click Me</button>
-</div>
+        <div class="text-xxl full pd-1">Hello <i data-lucide="menu"></i></div>
+        <br>
 
-<br>
 
-<div class="box full dfb column gap-10">
-    <div class="box full pd-1 dfb">
-        <input type="text" class="xxs pd-15 pdx-2 full mw-400" placeholder="First Name">
-    </div>
+        <div class="box full dfb align-center gap-10">
+            <div class="box fit dfb align-center gap-10">
+                <div class="text-xxs visible-link">Dashboard</div>
+                <div class="text-xxs">/</div>
+            </div>
+            <div class="box fit dfb align-center gap-10" key={index}>
+                <div class="text-xxs whitespace-nowrap visible-link">Engineer</div>
+                <div class="text-xxs">/</div>
+            </div>
+            <div class="box fit dfb align-center gap-10" key={index}>
+                <div class="text-xxs whitespace-nowrap bold-600 accent-color">Dummy Engineer</div>
+                <!-- <div class="text-xxs">/</div> -->
+            </div>
+        </div>
 
-    <div class="box full pd-1 dfb">
-        <textarea name="description" id="description" class="xxs pd-15 pdx-2 full mw-400" placeholder="Description"></textarea>
-    </div>
-</div>
+        <br>
 
-<div class="text-xxl full pd-1">Hello <i data-lucide="menu"></i></div>
+        <div class="box full dfb gap-10 wrap">
+            <div class="card mw-400" style="padding: 15px;">
+                <div class="text-m full">Wind Farm 1</div>
+                <div class="text-xxs full">100HP</div>
+            </div>
+            <div class="card mw-400" style="padding: 15px;">
+                <div class="text-m full">Wind Farm 1</div>
+                <div class="text-xxs full">100HP</div>
+            </div>
+            <div class="card mw-400" style="padding: 15px;">
+                <div class="text-m full">Wind Farm 1</div>
+                <div class="text-xxs full">100HP</div>
+            </div>
+        </div>
 
-<br>
+        <br>
 
-<div class="box full dfb align-center gap-10">
-    <div class="box fit dfb align-center gap-10">
-        <div class="text-xxs visible-link">Dashboard</div>
-        <div class="text-xxs">/</div>
-    </div>
-    <div class="box fit dfb align-center gap-10" key={index}>
-        <div class="text-xxs whitespace-nowrap visible-link">Engineer</div>
-        <div class="text-xxs">/</div>
-    </div>
-    <div class="box fit dfb align-center gap-10" key={index}>
-        <div class="text-xxs whitespace-nowrap bold-600 accent-color">Dummy Engineer</div>
-        <!-- <div class="text-xxs">/</div> -->
-    </div>
-</div>
+        <div class="box full dfb gap-10 wrap">
+            <button class="xxs pd-12 pdx-2" onclick="showModal()">Click Me</button>
+            <button class="xxs pd-12 pdx-2 delete" onclick="showFailedModal('Failed to create fault job.')">Click Me</button>
+            <button class="xxs pd-12 pdx-2 outline-black">Click Me</button>
+            <button class="xxs pd-12 pdx-2 secondary" onclick="showSuccessModal('Fault Job created !')">Click Me</button>
+            <button class="xxs pd-12 pdx-2 logout">Click Me</button>
+        </div>
 
-<br>
+        <br>
 
-<div class="box full dfb gap-10 wrap">
-    <div class="card mw-400" style="padding: 15px;">
-        <div class="text-m full">Wind Farm 1</div>
-        <div class="text-xxs full">100HP</div>
-    </div>
-    <div class="card mw-400" style="padding: 15px;">
-        <div class="text-m full">Wind Farm 1</div>
-        <div class="text-xxs full">100HP</div>
-    </div>
-    <div class="card mw-400" style="padding: 15px;">
-        <div class="text-m full">Wind Farm 1</div>
-        <div class="text-xxs full">100HP</div>
-    </div>
-</div>
+        <div class="box full dfb column gap-10">
+            <div class="box full pd-1 dfb">
+                <input type="text" class="xxs pd-15 pdx-2 full mw-400" placeholder="First Name">
+            </div>
 
-<br>
+            <div class="box full pd-1 dfb">
+                <textarea name="description" id="description" class="xxs pd-15 pdx-2 full mw-400" placeholder="Description"></textarea>
+            </div>
+        </div>
 
-<div class="box full dfb gap-10 wrap">
-    <button class="xxs pd-12 pdx-2" onclick="showModal()">Click Me</button>
-    <button class="xxs pd-12 pdx-2 delete" onclick="showFailedModal('Failed to create fault job.')">Click Me</button>
-    <button class="xxs pd-12 pdx-2 outline-black">Click Me</button>
-    <button class="xxs pd-12 pdx-2 secondary" onclick="showSuccessModal('Fault Job created !')">Click Me</button>
-    <button class="xxs pd-12 pdx-2 logout">Click Me</button>
-</div>
+        <div class="text-xxl full pd-1">Hello <i data-lucide="menu"></i></div>
 
-<br>
+        <br>
 
-<div class="box full dfb column gap-10">
-    <div class="box full pd-1 dfb">
-        <input type="text" class="xxs pd-15 pdx-2 full mw-400" placeholder="First Name">
-    </div>
+        <div class="box full dfb align-center gap-10">
+            <div class="box fit dfb align-center gap-10">
+                <div class="text-xxs visible-link">Dashboard</div>
+                <div class="text-xxs">/</div>
+            </div>
+            <div class="box fit dfb align-center gap-10" key={index}>
+                <div class="text-xxs whitespace-nowrap visible-link">Engineer</div>
+                <div class="text-xxs">/</div>
+            </div>
+            <div class="box fit dfb align-center gap-10" key={index}>
+                <div class="text-xxs whitespace-nowrap bold-600 accent-color">Dummy Engineer</div>
+                <!-- <div class="text-xxs">/</div> -->
+            </div>
+        </div>
 
-    <div class="box full pd-1 dfb">
-        <textarea name="description" id="description" class="xxs pd-15 pdx-2 full mw-400" placeholder="Description"></textarea>
-    </div>
-</div>
+        <br>
+
+        <div class="box full dfb gap-10 wrap">
+            <div class="card mw-400" style="padding: 15px;">
+                <div class="text-m full">Wind Farm 1</div>
+                <div class="text-xxs full">100HP</div>
+            </div>
+            <div class="card mw-400" style="padding: 15px;">
+                <div class="text-m full">Wind Farm 1</div>
+                <div class="text-xxs full">100HP</div>
+            </div>
+            <div class="card mw-400" style="padding: 15px;">
+                <div class="text-m full">Wind Farm 1</div>
+                <div class="text-xxs full">100HP</div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="box full dfb gap-10 wrap">
+            <button class="xxs pd-12 pdx-2" onclick="showModal()">Click Me</button>
+            <button class="xxs pd-12 pdx-2 delete" onclick="showFailedModal('Failed to create fault job.')">Click Me</button>
+            <button class="xxs pd-12 pdx-2 outline-black">Click Me</button>
+            <button class="xxs pd-12 pdx-2 secondary" onclick="showSuccessModal('Fault Job created !')">Click Me</button>
+            <button class="xxs pd-12 pdx-2 logout">Click Me</button>
+        </div>
+
+        <br>
+
+        <div class="box full dfb column gap-10">
+            <div class="box full pd-1 dfb">
+                <input type="text" class="xxs pd-15 pdx-2 full mw-400" placeholder="First Name">
+            </div>
+
+            <div class="box full pd-1 dfb">
+                <textarea name="description" id="description" class="xxs pd-15 pdx-2 full mw-400" placeholder="Description"></textarea>
+            </div>
+        </div>

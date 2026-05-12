@@ -1,0 +1,89 @@
+﻿@model ats_maintenance_tracker_group2.Models.CreateFaultJobViewModel
+@{
+    ViewBag.Title = "CreateFaultJob";
+}
+
+<br />
+<div class="text-xxl bold-600 full">Create Fault Job</div>
+<br />
+
+@using (Html.BeginForm()) {
+    <div class="form-horizontal">
+        <div class="box full pd-05">
+            @Html.DropDownListFor(
+                m => m.SelectedWindFarmId, Model.WindFarms, "Select Wind Farm",
+                htmlAttributes: new { @class = "xxs pd-15 pdx-2 full mw-500 form-control", @placeholder = "Farm Id", @id = "farmDropdown" }
+            )
+            @Html.ValidationMessageFor(model => model.SelectedWindFarmId, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
+
+        <div class="box full pd-05">
+            @Html.DropDownListFor(
+                m => m.SelectedTurbineId, Model.Turbines, "Select Turbine",
+                htmlAttributes: new { @class = "xxs pd-15 pdx-2 full mw-500 form-control", @placeholder = "Farm Id", @id = "turbineDropdown" }
+            )
+            @Html.ValidationMessageFor(model => model.SelectedTurbineId, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
+
+        <div class="box full pd-05">
+            @Html.TextAreaFor(
+                m => m.FaultDescription,
+                new { @class = "xxs h-30 pd-15 pdx-2 full mw-500 form-control", @placeholder = "Fault Description" }
+            )
+            @Html.ValidationMessageFor(model => model.FaultDescription, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
+
+        <button type="submit" class="xxs pd-12 pdx-2 fit whitespace-nowrap">Create Fault Job</button>
+    </div>
+}
+
+@if (ViewBag.Message != null) {
+    <div class="alert alert-success mt-3">
+        @ViewBag.Message
+    </div>
+}
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#farmDropdown").change(function () {
+                var farmId = $(this).val();
+                $("#turbineDropdown").empty
+                $("#turbineDropdown").append(
+                    $('<option>', {
+                        value: '',
+                        text: 'Loading Turbines...'
+                    })
+                );
+                $.ajax({
+                    url: '@Url.Action("GetTurbines", "Jobs")',
+                    type: 'GET',
+                    data: { farmId: farmId },
+                    success: function (data) {
+                        $("#turbineDropdown").empty();
+                        $("#turbineDropdown").append(
+                            $('<option>', {
+                                value: '',
+                                text: 'Select Turbine'
+                            })
+                        );
+                        $.each(data, function (i, turbine) {
+                            $("#turbineDropdown").append(
+                                $('<option>', {
+                                    value: turbine.Value,
+                                    text: turbine.Text
+                                })
+                            );
+                        });
+                    },
+                    error: function () {
+                        alert("Failed to load turbines.");
+                    }
+                });
+            });
+
+        });
+    </script>
+}
