@@ -1,45 +1,43 @@
-﻿
-
-
+﻿@model ats_maintenance_tracker_group2.Models.UpdateTurbineHoursViewModel
 @{
     ViewData["Title"] = "Simulation";
 }
 
 <h2>Simulation</h2>
 
-<!-- HOURS INPUT -->
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <div class="box full pd-05">
+            @Html.DropDownListFor(
+                m => m.SelectedWindFarmId, Model.WindFarms, "Select Wind Farm",
+                htmlAttributes: new { @class = "xxs pd-15 pdx-2 full mw-500 form-control", @placeholder = "Farm Id", @id = "farmDropdown" }
+            )
+            @Html.ValidationMessageFor(model => model.SelectedWindFarmId, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
 
-<div>
-    <label>Hours:</label>
-    <input type="number" name="hours" class="form-control" required />
-</div>
+        <div class="box full pd-05">
+            @Html.DropDownListFor(
+                m => m.SelectedTurbineId, Model.Turbines, "Select Turbine",
+                htmlAttributes: new { @class = "xxs pd-15 pdx-2 full mw-500 form-control", @placeholder = "Farm Id", @id = "turbineDropdown" }
+            )
+            @Html.ValidationMessageFor(model => model.SelectedTurbineId, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
 
-<br />
+        <div class="box full pd-05">
+            <div class="box full dfb align-center gap-15">
+                <div class="text-xxs fit">Hours: </div>
+                @Html.TextBoxFor(
+                    m => m.Hours,
+                    new { @type = "number", @class = "xxs h-30 pd-12 pdx-2 full mw-500 form-control", @placeholder = "Additional Hours" }
+                )
+            </div>
+            @Html.ValidationMessageFor(model => model.Hours, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
 
-<!--  WIND FARM -->
-
-<div>
-    <label>Select WindFarm:</label>
-    @Html.DropDownList("windFarmId",
-        (IEnumerable<SelectListItem>)ViewBag.WindFarms,
-        " Select WindFarm ",
-        new { id = "windFarmDropdown", @class = "form-control" })
-</div>
-<br />
-
-<!--  TURBINE -->
-
-<div>
-    <label>Select Turbine:</label>
-    <select id="turbineDropdown" name="turbineId" class="form-control">
-        <option value=""> Select Turbine </option>
-    </select>
-</div>
-
-
-<br />
-<button type="submit" class="btn btn-primary">Update</button>
-
+        <button type="submit" class="xxs pd-12 pdx-2 fit whitespace-nowrap">Create Simulation</button>
+    </div>
+}
 
 <br />
 
@@ -63,7 +61,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("#windFarmDropdown").change(function () {
+            $("#farmDropdown").change(function () {
                 var farmId = $(this).val();
                 $("#turbineDropdown").empty
                 $("#turbineDropdown").append(
@@ -99,7 +97,6 @@
                 });
             });
         });
-    </script>
     </script>
 }
 

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using ats_maintenance_tracker_group2.Models;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ats_maintenance_tracker_group2.Models;
 
 namespace ats_maintenance_tracker_group2.Controllers
 {
@@ -17,18 +18,34 @@ namespace ats_maintenance_tracker_group2.Controllers
         // GET: Simulation
         public ActionResult Index()
         {
-
-            // WindFarm list
-            var windFarms = db.WindFarms.ToList();
-
-            ViewBag.WindFarms = windFarms.Select(w => new SelectListItem
+            if (Request.IsAuthenticated)
             {
-                Text = w.FarmName,   
-                Value = w.FarmID     // key (WF001…)
-            }).ToList();
+                var staff = db.Users.Find(User.Identity.GetUserId());
 
-            return View();
+                if (staff.EmploymentRole == "CallHandler")
+                {
+                    UpdateTurbineHoursViewModel viewModel = new UpdateTurbineHoursViewModel
+                    {
+                        WindFarms = db.WindFarms
+                            .Select(w => new SelectListItem
+                            {
+                                Value = w.FarmID,
+                                Text = w.FarmName
+                            }).ToList(),
+                        Turbines = new List<SelectListItem>()
+                    };
 
+                    return View(viewModel);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
 
@@ -53,14 +70,14 @@ namespace ats_maintenance_tracker_group2.Controllers
 
 
 
-        public JsonResult GetTurbines(string windFarmId)
+        public JsonResult GetTurbines(string farmId)
         {
             var turbines = db.Turbines
-                .Where(t => t.FarmID == windFarmId)
+                .Where(t => t.FarmID == farmId)
                 .Select(t => new
                 {
-                    Id = t.TurbineID,
-                    Name = t.TurbineID
+                    Value = t.TurbineID,
+                    Text = t.TurbineID
                 }).ToList();
 
 

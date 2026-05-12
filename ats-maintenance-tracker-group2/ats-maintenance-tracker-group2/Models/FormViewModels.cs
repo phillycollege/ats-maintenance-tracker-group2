@@ -32,4 +32,21 @@ namespace ats_maintenance_tracker_group2.Models
         public List<SelectListItem> WindFarms { get; set; }
         public List<SelectListItem> Turbines { get; set; }
     }
+
+    public class UpdateTurbineHoursViewModel
+    {
+
+        [Display(Name = "Wind Farm")]
+        public string SelectedWindFarmId { get; set; }
+
+        [Display(Name = "Turbine")]
+        public string SelectedTurbineId { get; set; }
+
+        public int Hours { get; set; }
+
+        // list of windfarms and turbines for dropdown data
+        public List<SelectListItem> WindFarms { get; set; }
+        public List<SelectListItem> Turbines { get; set; }
+
+    }
 }
