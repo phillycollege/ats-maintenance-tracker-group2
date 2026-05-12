@@ -9,37 +9,97 @@
 
 <!-- HOURS INPUT -->
 
-<form asp-action="Index" method
-    <div>
-        <label>Hours:</label>
-        <input type="number" name="hours" class="form-control" required />
-    </div>
-
-    <br />
-
-    <!-- TURBINE DROPDOWN -->
-    <div>
-        <label>Select Turbine:</label>
-        <select name="turbine" class="form-control">
-            <option value="Turbine 1">Turbine 1</option>
-            <option value="Turbine 2">Turbine 2</option>
-            <option value="Turbine 3">Turbine 3</option>
-        </select>
-    </div>
-
-    <br />
-
-    <!-- UPDATE BUTTON -->
-    <button type="submit" class="btn btn-primary">Update</button>
-
-</form>
+<div>
+    <label>Hours:</label>
+    <input type="number" name="hours" class="form-control" required />
+</div>
 
 <br />
 
-<!-- SHOW RESULT -->
+<!--  WIND FARM -->
+
+<div>
+    <label>Select WindFarm:</label>
+    @Html.DropDownList("windFarmId",
+        (IEnumerable<SelectListItem>)ViewBag.WindFarms,
+        " Select WindFarm ",
+        new { id = "windFarmDropdown", @class = "form-control" })
+</div>
+<br />
+
+<!--  TURBINE -->
+
+<div>
+    <label>Select Turbine:</label>
+    <select id="turbineDropdown" name="turbineId" class="form-control">
+        <option value=""> Select Turbine </option>
+    </select>
+</div>
+
+
+<br />
+<button type="submit" class="btn btn-primary">Update</button>
+
+
+<br />
+
 @if (ViewBag.Result != null)
 {
     <div class="alert alert-success">
         @ViewBag.Result
     </div>
 }
+
+
+@if (ViewBag.Result != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.Result
+    </div>
+}
+
+<!--  JAVASCRIPT  -->
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#windFarmDropdown").change(function () {
+                var farmId = $(this).val();
+                $("#turbineDropdown").empty
+                $("#turbineDropdown").append(
+                    $('<option>', {
+                        value: '',
+                        text: 'Loading Turbines...'
+                    })
+                );
+                $.ajax({
+                    url: '@Url.Action("GetTurbines", "Simulation")',
+                    type: 'GET',
+                    data: { farmId: farmId },
+                    success: function (data) {
+                        $("#turbineDropdown").empty();
+                        $("#turbineDropdown").append(
+                            $('<option>', {
+                                value: '',
+                                text: 'Select Turbine'
+                            })
+                        );
+                        $.each(data, function (i, turbine) {
+                            $("#turbineDropdown").append(
+                                $('<option>', {
+                                    value: turbine.Value,
+                                    text: turbine.Text
+                                })
+                            );
+                        });
+                    },
+                    error: function () {
+                        alert("Failed to load turbines.");
+                    }
+                });
+            });
+        });
+    </script>
+    </script>
+}
+

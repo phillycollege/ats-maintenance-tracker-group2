@@ -180,6 +180,7 @@
     <Compile Include="Models\CallHandler.cs" />
     <Compile Include="Models\DatabaseInitialiser.cs" />
     <Compile Include="Models\Engineer.cs" />
+    <Compile Include="Models\FormViewModels.cs" />
     <Compile Include="Models\SimulationViewModel.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\Job.cs" />
