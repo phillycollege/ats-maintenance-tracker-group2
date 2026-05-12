@@ -38,7 +38,7 @@ namespace ats_maintenance_tracker_group2.Utilities
 
             // Assign engineer
             //TODO: Implement a more robust engineer assignment method (Ciaran, Philip)
-            var engineer = context.Staff
+            var engineer = context.Users
                     .Where(s => s.EmploymentRole == "Engineer")
                     .OrderBy(s => s.StaffID)
                     .FirstOrDefault();
