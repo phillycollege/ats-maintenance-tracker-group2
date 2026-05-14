@@ -38,41 +38,41 @@ namespace ats_maintenance_tracker_group2.Utilities
 
             // Assign engineer
             //TODO: Implement a more robust engineer assignment method (Ciaran, Philip)
-            var engineer = context.Staff
-                    .Where(s => s.EmploymentRole == "Engineer")
-                    .OrderBy(s => s.StaffID)
-                    .FirstOrDefault();
+            //var engineer = context.Staff
+            //        .Where(s => s.EmploymentRole == "Engineer")
+            //        .OrderBy(s => s.StaffID)
+            //        .FirstOrDefault();
 
-                if (engineer == null)
-                    return;
+            //    if (engineer == null)
+            //        return;
 
-                Job job = new Job
-                {
-                    JobDate = DateTime.Today.AddDays(1),
-                    JobTime = "Early",
-                    JobType = "Scheduled Service",
+            //    Job job = new Job
+            //    {
+            //        JobDate = DateTime.Today.AddDays(1),
+            //        JobTime = "Early",
+            //        JobType = "Scheduled Service",
 
-                    TurbineID = turbine.TurbineID,
-                    Turbine = turbine,
+            //        TurbineID = turbine.TurbineID,
+            //        Turbine = turbine,
 
-                    FarmID = turbine.FarmID,
-                    WindFarm = turbine.WindFarm,
+            //        FarmID = turbine.FarmID,
+            //        WindFarm = turbine.WindFarm,
 
-                    StaffID = engineer.StaffID,
-                    Staff = engineer,
+            //        StaffID = engineer.StaffID,
+            //        Staff = engineer,
 
-                    MainGeneratorServiced = true,
-                    GearboxServiced = true,
-                    YawMotorServiced = true,
-                    InternalPassengerLiftServiced = true,
+            //        MainGeneratorServiced = true,
+            //        GearboxServiced = true,
+            //        YawMotorServiced = true,
+            //        InternalPassengerLiftServiced = true,
 
 
 
-                    JobCompleteStatus = "Awaiting Engineer"
-                };
+            //        JobCompleteStatus = "Awaiting Engineer"
+            //    };
 
-                context.Jobs.Add(job);
-                context.SaveChanges();
+            //    context.Jobs.Add(job);
+            //    context.SaveChanges();
             }
         
     }
