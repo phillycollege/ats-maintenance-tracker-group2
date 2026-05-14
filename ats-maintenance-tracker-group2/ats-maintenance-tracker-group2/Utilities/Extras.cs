@@ -31,44 +31,67 @@ namespace ats_maintenance_tracker_group2.Utilities
                 j.JobCompleteStatus != "Complete"
             );
 
-            // Assign engineer
-            //TODO: Implement a more robust engineer assignment method (Ciaran, Philip)
-            //var engineer = context.Staff
-            //        .Where(s => s.EmploymentRole == "Engineer")
-            //        .OrderBy(s => s.StaffID)
-            //        .FirstOrDefault();
+            if (serviceExists)
+                return;
 
-            //    if (engineer == null)
-            //        return;
+            // Update turbine status , TODO: first assign engineer
+            turbine.OperationalStatus = "Requires Service";
 
-            //    Job job = new Job
-            //    {
-            //        JobDate = DateTime.Today.AddDays(1),
-            //        JobTime = "Early",
-            //        JobType = "Scheduled Service",
+            context.Jobs.Add(new Job
+            {
+                TurbineID = turbine.TurbineID,
+                JobType = "Scheduled Service",
+                JobCompleteStatus = "Pending",
+                //JobDate = 
+            });
+            context.SaveChanges();
+        }
 
-            //        TurbineID = turbine.TurbineID,
-            //        Turbine = turbine,
 
-            //        FarmID = turbine.FarmID,
-            //        WindFarm = turbine.WindFarm,
+        // Assign engineer
+        //TODO: Implement a more robust engineer assignment method (Ciaran, Philip)
 
-            //        StaffID = engineer.StaffID,
-            //        Staff = engineer,
-
-            //        MainGeneratorServiced = true,
-            //        GearboxServiced = true,
-            //        YawMotorServiced = true,
-            //        InternalPassengerLiftServiced = true,
+        // call the method AssignEngineer() in the CreateServicedJob method after creating the job
 
 
 
-            //        JobCompleteStatus = "Awaiting Engineer"
-            //    };
 
-            //    context.Jobs.Add(job);
-            //    context.SaveChanges();
-            }
+        //var engineer = context.Staff
+        //            .Where(s => s.EmploymentRole == "Engineer")
+        //            .OrderBy(s => s.StaffID)
+        //            .FirstOrDefault();
+
+        //        if (engineer == null)
+        //            return;
+
+        //        Job job = new Job
+        //        {
+        //            JobDate = DateTime.Today.AddDays(1),
+        //            JobTime = "Early",
+        //            JobType = "Scheduled Service",
+
+        //            TurbineID = turbine.TurbineID,
+        //            Turbine = turbine,
+
+        //            FarmID = turbine.FarmID,
+        //            WindFarm = turbine.WindFarm,
+
+        //            StaffID = engineer.StaffID,
+        //            Staff = engineer,
+
+        //            MainGeneratorServiced = true,
+        //            GearboxServiced = true,
+        //            YawMotorServiced = true,
+        //            InternalPassengerLiftServiced = true,
+
+
+
+        //            JobCompleteStatus = "Awaiting Engineer"
+        //        };
+
+        //        context.Jobs.Add(job);
+        //        context.SaveChanges();
+        //    }
         
     }
 }

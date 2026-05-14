@@ -1,10 +1,12 @@
 ﻿using ats_maintenance_tracker_group2.Models;
+using ats_maintenance_tracker_group2.Utilities;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 namespace ats_maintenance_tracker_group2.Controllers
 {
@@ -52,19 +54,51 @@ namespace ats_maintenance_tracker_group2.Controllers
 
 
         [HttpPost]
-        public ActionResult Index(int hours, string windFarmId, string turbineId)
-        {
-            ViewBag.Result = $"Simulation updated for {turbineId} with {hours} hours.";
+        //public ActionResult Index(int hours, string windFarmId, string turbineId)
 
-            // reload WindFarms
-            var windFarms = db.WindFarms.ToList();
-            ViewBag.WindFarms = windFarms.Select(w => new SelectListItem
+        
+        public ActionResult Index(UpdateTurbineHoursViewModel model)
+        {
+            var turbine = db.Turbines.Find(model.SelectedTurbineId);
+
+            if (turbine != null)
             {
-                Text = w.FarmName,
-                Value = w.FarmID
+                //update run time hours in the turbine table
+                turbine.RuntimeHours += model.Hours;
+
+                //save changes to the database
+                // important to save changes before calling the service job creator to ensure the updated hours are reflected in the database when checking for service eli
+
+                db.SaveChanges();
+
+                //Call your service job creator
+                Extras.CreateServicedJob(db, turbine);// check for service
+
+
+                ViewBag.Result = $"Forced update → {turbine.RuntimeHours}";
+                ViewBag.Result = $"UPDATED → {turbine.RuntimeHours}";
+            }
+            ViewBag.Result = $"Simulation updated for {model.SelectedTurbineId} with {model.Hours} hours.";
+            //ViewBag.Result = $"Simulation updated for {model.SelectedTurbineId} with {model.Hours} hours.";
+            ViewBag.Result = $"Turbine: {model.SelectedTurbineId}, Hours: {model.Hours}";
+
+
+            // rebuild dropdowns model
+            model.WindFarms = db.WindFarms.Select(w => new SelectListItem
+            {
+                Value = w.FarmID,
+                Text = w.FarmName
             }).ToList();
 
-            return View();
+            model.Turbines = db.Turbines
+                .Where(t => t.FarmID == model.SelectedWindFarmId)
+                .Select(t => new SelectListItem
+                {
+                    Value = t.TurbineID,
+                    Text = t.TurbineID
+                }).ToList();
+
+            return View(model);
         }
 
 
