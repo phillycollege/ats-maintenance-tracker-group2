@@ -40,7 +40,7 @@ namespace ats_maintenance_tracker_group2.Utilities
             context.Jobs.Add(new Job
             {
                 TurbineID = turbine.TurbineID,
-                JobType = "Service",
+                JobType = "Scheduled Service",
                 JobCompleteStatus = "Pending",
                 //JobDate = 
             });
