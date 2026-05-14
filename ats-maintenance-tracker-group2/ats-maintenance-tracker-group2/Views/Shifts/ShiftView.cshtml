@@ -1,0 +1,51 @@
+﻿@model ats_maintenance_tracker_group2.Utilities.DailyStaffScheduleViewModel
+@{
+    ViewBag.Title = "Shift View";
+}
+
+<div class="text-xxl bold-700 full">Shifts for the next week</div>
+<br />
+
+@foreach (var staffScheduleItem in Model.DailyStaffScheduleItems) {
+    <div class="box full pd-15 mb-05">
+        <div class="text-ml full bold-600 accent-color">
+            @staffScheduleItem.Date.ToString("dddd dd MMMM yyyy")
+        </div>
+        <div class="text-s full bold-500 pd-05">Early Shifts (@staffScheduleItem.EarlyShiftStaffs.Count Engineers) - 9:00am - 2:00pm</div>
+        <div class="box full dfb gap-10 wrap">
+            @foreach (var earlyShiftStaff in staffScheduleItem.EarlyShiftStaffs) {
+                <div class="engineer-shift-card">
+                    <div class="text-xs bold-600">@earlyShiftStaff.staff.FirstName @earlyShiftStaff.staff.LastName</div>
+                    <div class="text-xs">Assigned a Job: @earlyShiftStaff.isAssignedJob</div>
+                    @if (earlyShiftStaff.isAssignedJob) {
+                        <a href="@Url.Action("Details", "Jobs", new { id = earlyShiftStaff.assignedJob.JobID })">
+                            <button class="xxxs pd-12 pdx-2 fit whitespace-nowrap">
+                                <i data-lucide="square-pen" style="height: 18px;"></i> View Job Assigned
+                            </button>
+                        </a>
+                    }
+                </div>
+            }
+        </div>
+        <br />
+        <div class="text-sm full bold-500 pd-05">Late Shifts (@staffScheduleItem.LateShiftStaffs.Count Engineers) - 2:00pm - 9:00pm</div>
+        <div class="box full dfb gap-10 wrap">
+            @foreach (var earlyShiftStaff in staffScheduleItem.LateShiftStaffs) {
+                <div class="engineer-shift-card">
+                    <div class="text-xs bold-600">@earlyShiftStaff.staff.FirstName @earlyShiftStaff.staff.LastName</div>
+                    <div class="text-xs">Assigned a Job: @earlyShiftStaff.isAssignedJob</div>
+                    @if (earlyShiftStaff.isAssignedJob) {
+                        <a href="@Url.Action("Details", "Jobs", new { id = earlyShiftStaff.assignedJob.JobID })">
+                            <button class="xxxs pd-12 pdx-2 fit whitespace-nowrap">
+                                <i data-lucide="square-pen" style="height: 18px;"></i> View Job Assigned
+                            </button>
+                        </a>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+    <br />
+    <div class="little-divider" />
+    <br />
+}
