@@ -12,6 +12,11 @@ namespace ats_maintenance_tracker_group2.Utilities {
         public string shiftTime; // Early or Late
     }
 
+    public class AssignedEngineerShift {
+        public ShiftSession ShiftSession { get; set; }
+        public Engineer Engineer { get; set; }
+    }
+
     public class AssignEngineer {
         public ATSDBContext db = new ATSDBContext();
 
@@ -87,7 +92,7 @@ namespace ats_maintenance_tracker_group2.Utilities {
             return null;
         }
 
-        public Engineer Assign () {
+        public AssignedEngineerShift Assign () {
             // Get the fault datetime and shift type
             // shift session will be a looped value
             ShiftSession shiftSession = new ShiftSession() {
@@ -128,7 +133,12 @@ namespace ats_maintenance_tracker_group2.Utilities {
                 }
             }
 
-            return engineerFound;
+            AssignedEngineerShift assignedEngineerShift = new AssignedEngineerShift() {
+                Engineer = engineerFound,
+                ShiftSession = shiftSession
+            };
+
+            return assignedEngineerShift;
         }
     }
 }
