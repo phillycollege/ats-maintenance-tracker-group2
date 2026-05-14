@@ -433,10 +433,10 @@ namespace ats_maintenance_tracker_group2.Models
             foreach (var turbine in Turbines) {
                 context.Turbines.Add(turbine);
             }
-            foreach (var job in Jobs)
-            {
-                context.Jobs.Add(job);
-            }
+            //foreach (var job in Jobs)
+            //{
+            //    context.Jobs.Add(job);
+            //}
             foreach (var shift in Shifts)
             {
                 context.Shifts.Add(shift);
