@@ -52,19 +52,40 @@ namespace ats_maintenance_tracker_group2.Controllers
 
 
         [HttpPost]
-        public ActionResult Index(int hours, string windFarmId, string turbineId)
-        {
-            ViewBag.Result = $"Simulation updated for {turbineId} with {hours} hours.";
+        //public ActionResult Index(int hours, string windFarmId, string turbineId)
 
-            // reload WindFarms
-            var windFarms = db.WindFarms.ToList();
-            ViewBag.WindFarms = windFarms.Select(w => new SelectListItem
+        
+        public ActionResult Index(UpdateTurbineHoursViewModel model)
+        {
+            var turbine = db.Turbines.Find(model.SelectedTurbineId);
+
+            if (turbine != null)
             {
-                Text = w.FarmName,
-                Value = w.FarmID
+                turbine.RuntimeHours += model.Hours;
+                db.SaveChanges();
+
+                ViewBag.Result = $"Forced update → {turbine.RuntimeHours}";
+                ViewBag.Result = $"UPDATED → {turbine.RuntimeHours}";
+            }
+
+            //ViewBag.Result = $"Simulation updated for {model.SelectedTurbineId} with {model.Hours} hours.";
+            ViewBag.Result = $"Turbine: {model.SelectedTurbineId}, Hours: {model.Hours}";
+            // rebuild dropdowns
+            model.WindFarms = db.WindFarms.Select(w => new SelectListItem
+            {
+                Value = w.FarmID,
+                Text = w.FarmName
             }).ToList();
 
-            return View();
+            model.Turbines = db.Turbines
+                .Where(t => t.FarmID == model.SelectedWindFarmId)
+                .Select(t => new SelectListItem
+                {
+                    Value = t.TurbineID,
+                    Text = t.TurbineID
+                }).ToList();
+
+            return View(model);
         }
 
 

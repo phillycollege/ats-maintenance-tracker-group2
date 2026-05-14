@@ -10,8 +10,8 @@
     <div class="form-horizontal">
         <div class="box full pd-05">
             @Html.DropDownListFor(
-                m => m.SelectedWindFarmId, Model.WindFarms, "Select Wind Farm",
-                htmlAttributes: new { @class = "xxs pd-15 pdx-2 full mw-500 form-control", @placeholder = "Farm Id", @id = "farmDropdown" }
+                model => model.SelectedWindFarmId, Model.WindFarms, "Select Wind Farm",
+                htmlAttributes: new { @class = "xxs pd-15 pdx-2 full mw-500 form-control", @id = "farmDropdown" }
             )
             @Html.ValidationMessageFor(model => model.SelectedWindFarmId, "", new { @class = "text-xxs full text-center error-text mb-1" })
         </div>
@@ -19,7 +19,7 @@
         <div class="box full pd-05">
             @Html.DropDownListFor(
                 m => m.SelectedTurbineId, Model.Turbines, "Select Turbine",
-                htmlAttributes: new { @class = "xxs pd-15 pdx-2 full mw-500 form-control", @placeholder = "Farm Id", @id = "turbineDropdown" }
+                htmlAttributes: new { @class = "xxs pd-15 pdx-2 full mw-500 form-control", @id = "turbineDropdown" }
             )
             @Html.ValidationMessageFor(model => model.SelectedTurbineId, "", new { @class = "text-xxs full text-center error-text mb-1" })
         </div>
@@ -49,13 +49,6 @@
 }
 
 
-@if (ViewBag.Result != null)
-{
-    <div class="alert alert-success">
-        @ViewBag.Result
-    </div>
-}
-
 <!--  JAVASCRIPT  -->
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -63,7 +56,7 @@
         $(document).ready(function () {
             $("#farmDropdown").change(function () {
                 var farmId = $(this).val();
-                $("#turbineDropdown").empty
+                $("#turbineDropdown").empty();// changed from .html('') to .empty() for better performance
                 $("#turbineDropdown").append(
                     $('<option>', {
                         value: '',
