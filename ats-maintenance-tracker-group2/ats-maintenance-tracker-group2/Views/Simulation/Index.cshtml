@@ -1,45 +1,102 @@
-﻿
-
-
+@model ats_maintenance_tracker_group2.Models.UpdateTurbineHoursViewModel
 @{
     ViewData["Title"] = "Simulation";
 }
 
 <h2>Simulation</h2>
 
-<!-- HOURS INPUT -->
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <div class="box full pd-05">
+            @Html.DropDownListFor(
+                m => m.SelectedWindFarmId, Model.WindFarms, "Select Wind Farm",
+                htmlAttributes: new { @class = "xxs pd-15 pdx-2 full mw-500 form-control", @placeholder = "Farm Id", @id = "farmDropdown" }
+            )
+            @Html.ValidationMessageFor(model => model.SelectedWindFarmId, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
 
-<form asp-action="Index" method
-    <div>
-        <label>Hours:</label>
-        <input type="number" name="hours" class="form-control" required />
+        <div class="box full pd-05">
+            @Html.DropDownListFor(
+                m => m.SelectedTurbineId, Model.Turbines, "Select Turbine",
+                htmlAttributes: new { @class = "xxs pd-15 pdx-2 full mw-500 form-control", @placeholder = "Farm Id", @id = "turbineDropdown" }
+            )
+            @Html.ValidationMessageFor(model => model.SelectedTurbineId, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
+
+        <div class="box full pd-05">
+            <div class="box full dfb align-center gap-15">
+                <div class="text-xxs fit">Hours: </div>
+                @Html.TextBoxFor(
+                    m => m.Hours,
+                    new { @type = "number", @class = "xxs h-30 pd-12 pdx-2 full mw-500 form-control", @placeholder = "Additional Hours" }
+                )
+            </div>
+            @Html.ValidationMessageFor(model => model.Hours, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
+
+        <button type="submit" class="xxs pd-12 pdx-2 fit whitespace-nowrap">Create Simulation</button>
     </div>
-
-    <br />
-
-    <!-- TURBINE DROPDOWN -->
-    <div>
-        <label>Select Turbine:</label>
-        <select name="turbine" class="form-control">
-            <option value="Turbine 1">Turbine 1</option>
-            <option value="Turbine 2">Turbine 2</option>
-            <option value="Turbine 3">Turbine 3</option>
-        </select>
-    </div>
-
-    <br />
-
-    <!-- UPDATE BUTTON -->
-    <button type="submit" class="btn btn-primary">Update</button>
-
-</form>
+}
 
 <br />
 
-<!-- SHOW RESULT -->
 @if (ViewBag.Result != null)
 {
     <div class="alert alert-success">
         @ViewBag.Result
     </div>
 }
+
+
+@if (ViewBag.Result != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.Result
+    </div>
+}
+
+<!--  JAVASCRIPT  -->
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#farmDropdown").change(function () {
+                var farmId = $(this).val();
+                $("#turbineDropdown").empty
+                $("#turbineDropdown").append(
+                    $('<option>', {
+                        value: '',
+                        text: 'Loading Turbines...'
+                    })
+                );
+                $.ajax({
+                    url: '@Url.Action("GetTurbines", "Simulation")',
+                    type: 'GET',
+                    data: { farmId: farmId },
+                    success: function (data) {
+                        $("#turbineDropdown").empty();
+                        $("#turbineDropdown").append(
+                            $('<option>', {
+                                value: '',
+                                text: 'Select Turbine'
+                            })
+                        );
+                        $.each(data, function (i, turbine) {
+                            $("#turbineDropdown").append(
+                                $('<option>', {
+                                    value: turbine.Value,
+                                    text: turbine.Text
+                                })
+                            );
+                        });
+                    },
+                    error: function () {
+                        alert("Failed to load turbines.");
+                    }
+                });
+            });
+        });
+    </script>
+}
+
