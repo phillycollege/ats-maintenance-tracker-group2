@@ -8,11 +8,6 @@
         <div class="text-xxl bold-600 full">@Model.staff.FirstName @Model.staff.LastName's Jobs</div>
     } else {
         <div class="text-xxl bold-600 full">All Jobs</div>
-        <a href="@Url.Action("Create", "Jobs")">
-            <button type="submit" class="xxxs pd-12 pdx-2 fit whitespace-nowrap">
-                <i data-lucide="plus" style="height: 18px;"></i> Create New Job
-            </button>
-        </a>
     }
 </div>
 
