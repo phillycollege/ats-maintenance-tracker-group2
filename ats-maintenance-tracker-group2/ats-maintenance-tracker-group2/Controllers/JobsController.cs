@@ -256,6 +256,10 @@ namespace ats_maintenance_tracker_group2.Controllers {
             job.GearboxServiced = model.GearboxServiced;
             job.YawMotorServiced = model.YawMotorServiced;
 
+            // set turbine runtime hours to 0
+            var turbine = db.Turbines.Where(t => t.TurbineID == model.TurbineId).ToList().FirstOrDefault();
+            turbine.RuntimeHours = 0;
+
             // Update the status and save changes
             job.JobCompleteStatus = model.JobCompleteStatus;
             db.SaveChanges();
