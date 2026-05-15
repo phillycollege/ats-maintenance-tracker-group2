@@ -1,194 +1,42 @@
 ﻿@model ats_maintenance_tracker_group2.Models.Staff
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Staff Details";
 }
 
-<h2>Details</h2>
+<br />
+<div class="text-xxxs grey-5">Staff Details</div>
 
-<div>
-    <h4>Staff</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.StaffID)
-        </dt>
+<div class="box full dfb column">
+    <div class="text-xl full bold-600 pd-05">@Model.FirstName @Model.LastName</div>
+    <div class="text-xxs full pd-05 grey-4">@Model.EmploymentRole</div>
+    <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.StaffID)
-        </dd>
+    <div class="text-xxs full bold-600 pd-05 underline"><u>Staff Contact Information</u></div>
+    <div class="text-xxs full pd-05">Work Mobile Number - @Model.WorkMobileNumber</div>
+    <div class="text-xxs full pd-05">Work Email - @Model.WorkEmailAddress</div>
+    <div class="text-xxs full pd-05">Home Mobile Number - @Model.HomeMobileNumber</div>
+    <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
+    <div class="text-xxs full bold-600 pd-05 underline"><u>Staff Address Information</u></div>
+    <div class="text-xxs full pd-05">@Model.Address1</div>
+    <div class="text-xxs full pd-05">@Model.City</div>
+    <div class="text-xxs full pd-05">@Model.Postcode</div>
+    <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.WorkMobileNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WorkMobileNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HomeMobileNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HomeMobileNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.WorkEmailAddress)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WorkEmailAddress)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Postcode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Postcode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Salary)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Salary)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EmploymentRole)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EmploymentRole)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EmailConfirmed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EmailConfirmed)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PasswordHash)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PasswordHash)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SecurityStamp)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SecurityStamp)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumberConfirmed)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TwoFactorEnabled)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TwoFactorEnabled)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LockoutEndDateUtc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LockoutEnabled)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LockoutEnabled)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AccessFailedCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AccessFailedCount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-
-    </dl>
+    <div class="text-xxs full bold-600 pd-05 underline"><u>Staff Salary</u></div>
+    <div class="text-xxs full pd-05">£ @Model.Salary</div>
+    <br />
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="box full dfb align-center gap-10 mt-3">
+    <a href="@Url.Action("Edit", "Staffs", new { id = Model.StaffID })">
+        <button class="xxxs pd-12 pdx-2 fit whitespace-nowrap">
+            <i data-lucide="square-pen" style="height: 18px;"></i> Edit
+        </button>
+    </a>
+    <a href="@Url.Action("Index", "Staffs")">
+        <button class="xxxs pd-12 pdx-2 fit outline-black whitespace-nowrap">
+            Back To List
+        </button>
+    </a>
+</div>

@@ -30,38 +30,60 @@
 @using (Html.BeginForm("UpdateStatus", "Jobs", FormMethod.Post)) {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    @Html.HiddenFor(m => m.JobID)
-    @Html.HiddenFor(m => m.FarmName)
-    @Html.HiddenFor(m => m.TurbineId)
-    @Html.HiddenFor(m => m.JobType)
+    <div class="form-horizontal">
+        @Html.HiddenFor(m => m.JobID)
+        @Html.HiddenFor(m => m.FarmName)
+        @Html.HiddenFor(m => m.TurbineId)
+        @Html.HiddenFor(m => m.JobType)
 
-    <div class="text-sm bold-600 pd-1 full"><u>Job Details</u></div>
-    <div class="text-s pd-05 full">@Model.FarmName</div>
-    <div class="text-xs pd-05 full"><b>Job Type</b> - @Model.JobType</div>
-    <div class="text-xs pd-05 full"><b>Turbine Id</b> - @Model.TurbineId</div>
-    <br />
+        <div class="text-sm bold-600 pd-1 full"><u>Job Details</u></div>
+        <div class="text-s pd-05 full">@Model.FarmName</div>
+        <div class="text-xs pd-05 full"><b>Job Type</b> - @Model.JobType</div>
+        <div class="text-xs pd-05 full"><b>Turbine Id</b> - @Model.TurbineId</div>
+        <br />
 
-    @Html.ValidationSummary(true, "", new { @class = "text-xxs full pd-1 text-danger" })
-    <div class="box full pd-05">
-        @Html.DropDownListFor(m => m.JobCompleteStatus,
-            new List<SelectListItem> {
-                new SelectListItem { Text = "Awaiting Engineer", Value = "Awaiting Engineer" },
-                new SelectListItem { Text = "Completed", Value = "Completed" }
-            },
-        "Select Job Status", htmlAttributes: new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Farm Id" })
-        @Html.ValidationMessageFor(model => model.JobCompleteStatus, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        @Html.ValidationSummary(true, "", new { @class = "text-xxs full pd-1 text-danger" })
+
+        @if (Model.JobType == "Service") {
+            <div class="box full mb-1">
+                <div class="box full pd-05">
+                    @Html.EditorFor(model => model.MainGeneratorServiced, "", new { @class = "xxs pd-15 pdx-2 full mw-400" })
+                    @Html.LabelFor(model => model.MainGeneratorServiced, "Main Generator Serviced", new { @class = "xxs pd-15 pdx-2 full mw-400" })
+                </div>
+                <div class="box full pd-05">
+                    @Html.EditorFor(model => model.GearboxServiced, "", new { @class = "xxs pd-15 pdx-2 full mw-400" })
+                    @Html.LabelFor(model => model.GearboxServiced, "Gear Box Serviced", new { @class = "xxs pd-15 pdx-2 full mw-400" })
+                </div>
+                <div class="box full pd-05">
+                    @Html.EditorFor(model => model.InternalPassengerLiftServiced, "", new { @class = "xxs pd-15 pdx-2 full mw-400" })
+                    @Html.LabelFor(model => model.InternalPassengerLiftServiced, "Internal Passenger Lift Serviced", new { @class = "xxs pd-15 pdx-2 full mw-400" })
+                </div>
+                <div class="box full pd-05">
+                    @Html.EditorFor(model => model.YawMotorServiced, "", new { @class = "xxs pd-15 pdx-2 full mw-400" })
+                    @Html.LabelFor(model => model.YawMotorServiced, "Yaw Motor Serviced", new { @class = "xxs pd-15 pdx-2 full mw-400" })
+                </div>
+            </div>
+        }
+
+        <div class="box full pd-05">
+            @Html.DropDownListFor(m => m.JobCompleteStatus,
+                new List<SelectListItem> {
+                    new SelectListItem { Text = "Awaiting Engineer", Value = "Awaiting Engineer" },
+                    new SelectListItem { Text = "Completed", Value = "Completed" }
+                },
+            "Select Job Status", htmlAttributes: new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Farm Id" })
+            @Html.ValidationMessageFor(model => model.JobCompleteStatus, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
+
+        <div class="box full dfb align-center gap-10 mt-1">
+            <button type="submit" class="xxxs pd-12 pdx-2 fit whitespace-nowrap">Update Job</button>
+            <a href="@Url.Action("Index", "Jobs")">
+                <button type="button" class="xxxs pd-12 pdx-2 fit outline-black whitespace-nowrap">
+                    Back To All Jobs
+                </button>
+            </a>
+        </div>
     </div>
-
-    <div class="box full dfb align-center gap-10 mt-1">
-        <button type="submit" class="xxxs pd-12 pdx-2 fit whitespace-nowrap">Update Job</button>
-        <a href="@Url.Action("Index", "Jobs")">
-            <button type="button" class="xxxs pd-12 pdx-2 fit outline-black whitespace-nowrap">
-                Back To All Jobs
-            </button>
-        </a>
-    </div>
-</div>
 }
 
 @section Scripts {
