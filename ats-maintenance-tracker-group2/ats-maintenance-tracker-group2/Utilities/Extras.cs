@@ -37,61 +37,23 @@ namespace ats_maintenance_tracker_group2.Utilities
             // Update turbine status , TODO: first assign engineer
             turbine.OperationalStatus = "Requires Service";
 
-            context.Jobs.Add(new Job
-            {
+            AssignedEngineerShift assignedEngineerShift = new AssignEngineer().Assign();
+            Job job = new Job() {
                 TurbineID = turbine.TurbineID,
-                JobType = "Scheduled Service",
-                JobCompleteStatus = "Pending",
-                //JobDate = 
-            });
+                JobType = "Service",
+                JobCompleteStatus = "Awaiting Engineer",
+                JobDate = assignedEngineerShift.ShiftSession.jobTime,
+                StaffID = assignedEngineerShift.Engineer.StaffID,
+                MainGeneratorServiced = false,
+                GearboxServiced = false,
+                YawMotorServiced = false,
+                InternalPassengerLiftServiced = false,
+                FarmID = turbine.FarmID,
+                JobTime = assignedEngineerShift.ShiftSession.shiftTime
+            };
+
+            context.Jobs.Add(job);
             context.SaveChanges();
         }
-
-
-        // Assign engineer
-        //TODO: Implement a more robust engineer assignment method (Ciaran, Philip)
-
-        // call the method AssignEngineer() in the CreateServicedJob method after creating the job
-
-
-
-
-        //var engineer = context.Staff
-        //            .Where(s => s.EmploymentRole == "Engineer")
-        //            .OrderBy(s => s.StaffID)
-        //            .FirstOrDefault();
-
-        //        if (engineer == null)
-        //            return;
-
-        //        Job job = new Job
-        //        {
-        //            JobDate = DateTime.Today.AddDays(1),
-        //            JobTime = "Early",
-        //            JobType = "Scheduled Service",
-
-        //            TurbineID = turbine.TurbineID,
-        //            Turbine = turbine,
-
-        //            FarmID = turbine.FarmID,
-        //            WindFarm = turbine.WindFarm,
-
-        //            StaffID = engineer.StaffID,
-        //            Staff = engineer,
-
-        //            MainGeneratorServiced = true,
-        //            GearboxServiced = true,
-        //            YawMotorServiced = true,
-        //            InternalPassengerLiftServiced = true,
-
-
-
-        //            JobCompleteStatus = "Awaiting Engineer"
-        //        };
-
-        //        context.Jobs.Add(job);
-        //        context.SaveChanges();
-        //    }
-        
     }
 }
