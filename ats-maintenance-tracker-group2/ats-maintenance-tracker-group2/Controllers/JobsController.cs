@@ -127,6 +127,7 @@ namespace ats_maintenance_tracker_group2.Controllers {
 
             // Get turbine from selected turbine id
             var turbine = db.Turbines.Find(model.SelectedTurbineId);
+            turbine.OperationalStatus = "Fault";
 
             if (turbine == null) {
                 ModelState.AddModelError("", "Turbine not found");
@@ -257,6 +258,7 @@ namespace ats_maintenance_tracker_group2.Controllers {
             // set turbine runtime hours to 0
             var turbine = db.Turbines.Where(t => t.TurbineID == model.TurbineId).ToList().FirstOrDefault();
             turbine.RuntimeHours = 0;
+            turbine.OperationalStatus = "Active";
 
             // Update the status and save changes
             job.JobCompleteStatus = model.JobCompleteStatus;
