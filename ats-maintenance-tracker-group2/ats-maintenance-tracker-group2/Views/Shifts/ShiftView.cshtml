@@ -16,7 +16,7 @@
             @foreach (var earlyShiftStaff in staffScheduleItem.EarlyShiftStaffs) {
                 <div class="engineer-shift-card">
                     <div class="text-xs bold-600">@earlyShiftStaff.staff.FirstName @earlyShiftStaff.staff.LastName</div>
-                    <div class="text-xs">Assigned a Job: @earlyShiftStaff.isAssignedJob</div>
+                    <div class="text-xs mb-1">Assigned a Job: @earlyShiftStaff.isAssignedJob</div>
                     @if (earlyShiftStaff.isAssignedJob) {
                         <a href="@Url.Action("Details", "Jobs", new { id = earlyShiftStaff.assignedJob.JobID })">
                             <button class="xxxs pd-12 pdx-2 fit whitespace-nowrap">
@@ -33,7 +33,7 @@
             @foreach (var earlyShiftStaff in staffScheduleItem.LateShiftStaffs) {
                 <div class="engineer-shift-card">
                     <div class="text-xs bold-600">@earlyShiftStaff.staff.FirstName @earlyShiftStaff.staff.LastName</div>
-                    <div class="text-xs">Assigned a Job: @earlyShiftStaff.isAssignedJob</div>
+                    <div class="text-xs mb-1">Assigned a Job: @earlyShiftStaff.isAssignedJob</div>
                     @if (earlyShiftStaff.isAssignedJob) {
                         <a href="@Url.Action("Details", "Jobs", new { id = earlyShiftStaff.assignedJob.JobID })">
                             <button class="xxxs pd-12 pdx-2 fit whitespace-nowrap">

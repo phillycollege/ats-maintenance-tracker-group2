@@ -1,5 +1,6 @@
 ﻿using ats_maintenance_tracker_group2.Models;
 using ats_maintenance_tracker_group2.Utilities;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -34,117 +35,134 @@ namespace ats_maintenance_tracker_group2.Controllers {
         }
 
         public ActionResult ShiftView () {
-            List<Shift> shifts = db.Shifts.Include(s => s.Staff).ToList();
-            List<Job> jobs = db.Jobs.ToList();
+            // check if user is logged in
+            // redirect users who are not logged in to the login page
+            // redirect engineers to the home page from this page
+            if (Request.IsAuthenticated) {
+                var staff = db.Users.Find(User.Identity.GetUserId());
 
-            DailyStaffScheduleViewModel dailyStaffScheduleViewModel = new DailyStaffScheduleViewModel();
-            
-            DateTime currentDay = DateTime.Now;
-
-            for (int i = 0; i < 7; i++) {
-                DailyStaffScheduleItem dailyStaffScheduleItem = new DailyStaffScheduleItem();
-                DateTime currentDate = currentDay.AddDays(i);
-
-                dailyStaffScheduleItem.Date = currentDate;
-
-                foreach (var shift in shifts) {
-                    if (currentDate.DayOfWeek == DayOfWeek.Monday && shift.Mon) {
-                        // monday
-                        ShiftStaff shiftStaff = new ShiftStaff() {
-                            isAssignedJob = (jobs.FindAll(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date).Count > 0),
-                            staff = shift.Staff,
-                            assignedJob = jobs.Find(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date)
-                        };
-                        if (shift.ShiftType == "Early") {
-                            dailyStaffScheduleItem.EarlyShiftStaffs.Add(shiftStaff);
-                        } else {
-                            dailyStaffScheduleItem.LateShiftStaffs.Add(shiftStaff);
-                        }
-
-                    } else if (currentDate.DayOfWeek == DayOfWeek.Tuesday && shift.Tue) {
-                        // tuesday
-                        ShiftStaff shiftStaff = new ShiftStaff() {
-                            isAssignedJob = (jobs.FindAll(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date).Count > 0),
-                            staff = shift.Staff,
-                            assignedJob = jobs.Find(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date)
-                        };
-                        if (shift.ShiftType == "Early") {
-                            dailyStaffScheduleItem.EarlyShiftStaffs.Add(shiftStaff);
-                        } else {
-                            dailyStaffScheduleItem.LateShiftStaffs.Add(shiftStaff);
-                        }
-
-                    } else if (currentDate.DayOfWeek == DayOfWeek.Wednesday && shift.Wed) {
-                        // wednesday
-                        ShiftStaff shiftStaff = new ShiftStaff() {
-                            isAssignedJob = (jobs.FindAll(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date).Count > 0),
-                            staff = shift.Staff,
-                            assignedJob = jobs.Find(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date)
-                        };
-                        if (shift.ShiftType == "Early") {
-                            dailyStaffScheduleItem.EarlyShiftStaffs.Add(shiftStaff);
-                        } else {
-                            dailyStaffScheduleItem.LateShiftStaffs.Add(shiftStaff);
-                        }
-
-                    } else if (currentDate.DayOfWeek == DayOfWeek.Thursday && shift.Thu) {
-                        // thursday
-                        ShiftStaff shiftStaff = new ShiftStaff() {
-                            isAssignedJob = (jobs.FindAll(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date).Count > 0),
-                            staff = shift.Staff,
-                            assignedJob = jobs.Find(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date)
-                        };
-                        if (shift.ShiftType == "Early") {
-                            dailyStaffScheduleItem.EarlyShiftStaffs.Add(shiftStaff);
-                        } else {
-                            dailyStaffScheduleItem.LateShiftStaffs.Add(shiftStaff);
-                        }
-
-                    } else if (currentDate.DayOfWeek == DayOfWeek.Friday && shift.Fri) {
-                        // friday
-                        ShiftStaff shiftStaff = new ShiftStaff() {
-                            isAssignedJob = (jobs.FindAll(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date).Count > 0),
-                            staff = shift.Staff,
-                            assignedJob = jobs.Find(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date)
-                        };
-                        if (shift.ShiftType == "Early") {
-                            dailyStaffScheduleItem.EarlyShiftStaffs.Add(shiftStaff);
-                        } else {
-                            dailyStaffScheduleItem.LateShiftStaffs.Add(shiftStaff);
-                        }
-
-                    } else if (currentDate.DayOfWeek == DayOfWeek.Saturday && shift.Sat) {
-                        // saturday
-                        ShiftStaff shiftStaff = new ShiftStaff() {
-                            isAssignedJob = (jobs.FindAll(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date).Count > 0),
-                            staff = shift.Staff,
-                            assignedJob = jobs.Find(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date)
-                        };
-                        if (shift.ShiftType == "Early") {
-                            dailyStaffScheduleItem.EarlyShiftStaffs.Add(shiftStaff);
-                        } else {
-                            dailyStaffScheduleItem.LateShiftStaffs.Add(shiftStaff);
-                        }
-
-                    } else if (currentDate.DayOfWeek == DayOfWeek.Sunday && shift.Sun) {
-                        // sunday
-                        ShiftStaff shiftStaff = new ShiftStaff() {
-                            isAssignedJob = (jobs.FindAll(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date).Count > 0),
-                            staff = shift.Staff,
-                            assignedJob = jobs.Find(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date)
-                        };
-                        if (shift.ShiftType == "Early") {
-                            dailyStaffScheduleItem.EarlyShiftStaffs.Add(shiftStaff);
-                        } else {
-                            dailyStaffScheduleItem.LateShiftStaffs.Add(shiftStaff);
-                        }
-                    }
+                if (staff == null) {
+                    return HttpNotFound();
                 }
-                
-                dailyStaffScheduleViewModel.DailyStaffScheduleItems.Add(dailyStaffScheduleItem);
-            }
 
-            return View(dailyStaffScheduleViewModel);
+                if (staff.EmploymentRole != "Engineer") {
+                    List<Shift> shifts = db.Shifts.Include(s => s.Staff).ToList();
+                    List<Job> jobs = db.Jobs.ToList();
+
+                    DailyStaffScheduleViewModel dailyStaffScheduleViewModel = new DailyStaffScheduleViewModel();
+            
+                    DateTime currentDay = DateTime.Now;
+
+                    for (int i = 0; i < 7; i++) {
+                        DailyStaffScheduleItem dailyStaffScheduleItem = new DailyStaffScheduleItem();
+                        DateTime currentDate = currentDay.AddDays(i);
+
+                        dailyStaffScheduleItem.Date = currentDate;
+
+                        foreach (var shift in shifts) {
+                            if (currentDate.DayOfWeek == DayOfWeek.Monday && shift.Mon) {
+                                // monday
+                                ShiftStaff shiftStaff = new ShiftStaff() {
+                                    isAssignedJob = (jobs.FindAll(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date).Count > 0),
+                                    staff = shift.Staff,
+                                    assignedJob = jobs.Find(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date)
+                                };
+                                if (shift.ShiftType == "Early") {
+                                    dailyStaffScheduleItem.EarlyShiftStaffs.Add(shiftStaff);
+                                } else {
+                                    dailyStaffScheduleItem.LateShiftStaffs.Add(shiftStaff);
+                                }
+
+                            } else if (currentDate.DayOfWeek == DayOfWeek.Tuesday && shift.Tue) {
+                                // tuesday
+                                ShiftStaff shiftStaff = new ShiftStaff() {
+                                    isAssignedJob = (jobs.FindAll(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date).Count > 0),
+                                    staff = shift.Staff,
+                                    assignedJob = jobs.Find(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date)
+                                };
+                                if (shift.ShiftType == "Early") {
+                                    dailyStaffScheduleItem.EarlyShiftStaffs.Add(shiftStaff);
+                                } else {
+                                    dailyStaffScheduleItem.LateShiftStaffs.Add(shiftStaff);
+                                }
+
+                            } else if (currentDate.DayOfWeek == DayOfWeek.Wednesday && shift.Wed) {
+                                // wednesday
+                                ShiftStaff shiftStaff = new ShiftStaff() {
+                                    isAssignedJob = (jobs.FindAll(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date).Count > 0),
+                                    staff = shift.Staff,
+                                    assignedJob = jobs.Find(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date)
+                                };
+                                if (shift.ShiftType == "Early") {
+                                    dailyStaffScheduleItem.EarlyShiftStaffs.Add(shiftStaff);
+                                } else {
+                                    dailyStaffScheduleItem.LateShiftStaffs.Add(shiftStaff);
+                                }
+
+                            } else if (currentDate.DayOfWeek == DayOfWeek.Thursday && shift.Thu) {
+                                // thursday
+                                ShiftStaff shiftStaff = new ShiftStaff() {
+                                    isAssignedJob = (jobs.FindAll(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date).Count > 0),
+                                    staff = shift.Staff,
+                                    assignedJob = jobs.Find(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date)
+                                };
+                                if (shift.ShiftType == "Early") {
+                                    dailyStaffScheduleItem.EarlyShiftStaffs.Add(shiftStaff);
+                                } else {
+                                    dailyStaffScheduleItem.LateShiftStaffs.Add(shiftStaff);
+                                }
+
+                            } else if (currentDate.DayOfWeek == DayOfWeek.Friday && shift.Fri) {
+                                // friday
+                                ShiftStaff shiftStaff = new ShiftStaff() {
+                                    isAssignedJob = (jobs.FindAll(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date).Count > 0),
+                                    staff = shift.Staff,
+                                    assignedJob = jobs.Find(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date)
+                                };
+                                if (shift.ShiftType == "Early") {
+                                    dailyStaffScheduleItem.EarlyShiftStaffs.Add(shiftStaff);
+                                } else {
+                                    dailyStaffScheduleItem.LateShiftStaffs.Add(shiftStaff);
+                                }
+
+                            } else if (currentDate.DayOfWeek == DayOfWeek.Saturday && shift.Sat) {
+                                // saturday
+                                ShiftStaff shiftStaff = new ShiftStaff() {
+                                    isAssignedJob = (jobs.FindAll(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date).Count > 0),
+                                    staff = shift.Staff,
+                                    assignedJob = jobs.Find(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date)
+                                };
+                                if (shift.ShiftType == "Early") {
+                                    dailyStaffScheduleItem.EarlyShiftStaffs.Add(shiftStaff);
+                                } else {
+                                    dailyStaffScheduleItem.LateShiftStaffs.Add(shiftStaff);
+                                }
+
+                            } else if (currentDate.DayOfWeek == DayOfWeek.Sunday && shift.Sun) {
+                                // sunday
+                                ShiftStaff shiftStaff = new ShiftStaff() {
+                                    isAssignedJob = (jobs.FindAll(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date).Count > 0),
+                                    staff = shift.Staff,
+                                    assignedJob = jobs.Find(j => j.StaffID == shift.Staff.StaffID && j.JobDate.Date == currentDate.Date)
+                                };
+                                if (shift.ShiftType == "Early") {
+                                    dailyStaffScheduleItem.EarlyShiftStaffs.Add(shiftStaff);
+                                } else {
+                                    dailyStaffScheduleItem.LateShiftStaffs.Add(shiftStaff);
+                                }
+                            }
+                        }
+                
+                        dailyStaffScheduleViewModel.DailyStaffScheduleItems.Add(dailyStaffScheduleItem);
+                    }
+
+                    return View(dailyStaffScheduleViewModel);
+                } else {
+                    return HttpNotFound();
+                }
+            } else {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
         // ✅ GET: Shifts/Details/1

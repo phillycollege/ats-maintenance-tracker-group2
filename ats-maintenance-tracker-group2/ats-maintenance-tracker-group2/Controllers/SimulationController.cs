@@ -78,14 +78,12 @@ namespace ats_maintenance_tracker_group2.Controllers
                 ViewBag.Result = $"Forced update → {turbine.RuntimeHours}";
                 ViewBag.Result = $"UPDATED → {turbine.RuntimeHours}";
             }
+
             ViewBag.Result = $"Simulation updated for {model.SelectedTurbineId} with {model.Hours} hours.";
-            //ViewBag.Result = $"Simulation updated for {model.SelectedTurbineId} with {model.Hours} hours.";
-            ViewBag.Result = $"Turbine: {model.SelectedTurbineId}, Hours: {model.Hours}";
 
 
             // rebuild dropdowns model
-            model.WindFarms = db.WindFarms.Select(w => new SelectListItem
-            {
+            model.WindFarms = db.WindFarms.Select(w => new SelectListItem {
                 Value = w.FarmID,
                 Text = w.FarmName
             }).ToList();
@@ -111,7 +109,7 @@ namespace ats_maintenance_tracker_group2.Controllers
                 .Select(t => new
                 {
                     Value = t.TurbineID,
-                    Text = t.TurbineID
+                    Text = t.TurbineID + " - " + t.RuntimeHours + " hours"
                 }).ToList();
 
 
