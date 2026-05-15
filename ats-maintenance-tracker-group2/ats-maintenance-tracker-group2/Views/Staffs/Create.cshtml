@@ -1,207 +1,91 @@
-﻿@model ats_maintenance_tracker_group2.Models.Staff
+﻿@model ats_maintenance_tracker_group2.Models.CreateStaffViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Staff";
 }
 
-<h2>Create</h2>
+<br />
+<div class="text-xxl bold-600 full">Create Staff</div>
+<br />
 
-@using (Html.BeginForm()) 
-{
+@using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Staff</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="box full pd-05">
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "xxs h-30 pd-15 pdx-2 full mw-500 form-control", @placeholder = "First Name" })
+            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-xxs full text-center error-text mb-1" })
         </div>
-    </div>
 
-
-
-    <div class="box full pd-05">
-        @Html.EditorFor(model => model.StaffID, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "StaffID" } })
-        @Html.ValidationMessageFor(model => model.StaffID, "", new { @class = "text-xxs full text-center error-text mb-1" })
-    </div>
-
-
-    <div class="box full pd-05">
-        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "FirstName" } })
-        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-xxs full text-center error-text mb-1" })
-    </div>
-
-
-    <div class="box full pd-05">
-        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "LastName" } })
-        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-xxs full text-center error-text mb-1" })
-    </div>
-
-
-    <div class="box full pd-05">
-        @Html.EditorFor(model => model.WorkMobileNumber, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "WorkMobileNumber" } })
-        @Html.ValidationMessageFor(model => model.WorkMobileNumber, "", new { @class = "text-xxs full text-center error-text mb-1" })
-    </div>
-
-
-    <div class="box full pd-05">
-        @Html.EditorFor(model => model.HomeMobileNumber, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "HomeMobileNumber" } })
-        @Html.ValidationMessageFor(model => model.HomeMobileNumber, "", new { @class = "text-xxs full text-center error-text mb-1" })
-    </div>
-
-
-    <div class="box full pd-05">
-        @Html.EditorFor(model => model.WorkEmailAddress, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "WorkEmailAddress" } })
-        @Html.ValidationMessageFor(model => model.WorkEmailAddress, "", new { @class = "text-xxs full text-center error-text mb-1" })
-    </div>
-
-
-    <div class="box full pd-05">
-        @Html.EditorFor(model => model.Address1, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Address1" } })
-        @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-xxs full text-center error-text mb-1" })
-    </div>
-
-
-    <div class="box full pd-05">
-        @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "City" } })
-        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-xxs full text-center error-text mb-1" })
-    </div>
-
-
-    <div class="box full pd-05">
-        @Html.EditorFor(model => model.Postcode, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Postcode" } })
-        @Html.ValidationMessageFor(model => model.Postcode, "", new { @class = "text-xxs full text-center error-text mb-1" })
-    </div>
-
-
-    <div class="box full pd-05">
-        @Html.EditorFor(model => model.Salary, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Salary" } })
-        @Html.ValidationMessageFor(model => model.Salary, "", new { @class = "text-xxs full text-center error-text mb-1" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.EmploymentRole, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.EmploymentRole, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.EmploymentRole, "", new { @class = "text-danger" })
+        <div class="box full pd-05">
+            @Html.TextBoxFor(m => m.LastName, new { @class = "xxs h-30 pd-15 pdx-2 full mw-500 form-control", @placeholder = "Last Name" })
+            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-xxs full text-center error-text mb-1" })
         </div>
-    </div>
 
-
-    <div class="box full pd-05">
-        @Html.EditorFor(model => model.EmploymentRole, new { htmlAttributes = new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Salary" } })
-        @Html.ValidationMessageFor(model => model.Salary, "", new { @class = "text-xxs full text-center error-text mb-1" })
-    </div>
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        <div class="box full pd-05">
+            @Html.TextBoxFor(m => m.WorkEmailAddress, new { @class = "xxs h-30 pd-15 pdx-2 full mw-500 form-control", @placeholder = "Work Email Address" })
+            @Html.ValidationMessageFor(model => model.WorkEmailAddress, "", new { @class = "text-xxs full text-center error-text mb-1" })
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.EmailConfirmed, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.EmailConfirmed)
-                @Html.ValidationMessageFor(model => model.EmailConfirmed, "", new { @class = "text-danger" })
-            </div>
+        <div class="box full pd-05">
+            @Html.TextBoxFor(m => m.HomeMobileNumber, new { @class = "xxs h-30 pd-15 pdx-2 full mw-500 form-control", @placeholder = "Home Mobile Number" })
+            @Html.ValidationMessageFor(model => model.HomeMobileNumber, "", new { @class = "text-xxs full text-center error-text mb-1" })
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.PasswordHash, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
+        <div class="box full pd-05">
+            @Html.TextBoxFor(m => m.WorkMobileNumber, new { @class = "xxs h-30 pd-15 pdx-2 full mw-500 form-control", @placeholder = "Work Mobile Number" })
+            @Html.ValidationMessageFor(model => model.WorkMobileNumber, "", new { @class = "text-xxs full text-center error-text mb-1" })
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.SecurityStamp, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SecurityStamp, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SecurityStamp, "", new { @class = "text-danger" })
+        <div class="box full pd-05">
+            @Html.TextBoxFor(m => m.Address1, new { @class = "xxs h-30 pd-15 pdx-2 full mw-500 form-control", @placeholder = "Address" })
+            @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-xxs full text-center error-text mb-1" })
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+        <div class="box full pd-05">
+            @Html.TextBoxFor(m => m.Postcode, new { @class = "xxs h-30 pd-15 pdx-2 full mw-500 form-control", @placeholder = "Postcode" })
+            @Html.ValidationMessageFor(model => model.Postcode, "", new { @class = "text-xxs full text-center error-text mb-1" })
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.PhoneNumberConfirmed, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.PhoneNumberConfirmed)
-                @Html.ValidationMessageFor(model => model.PhoneNumberConfirmed, "", new { @class = "text-danger" })
-            </div>
+        <div class="box full pd-05">
+            @Html.TextBoxFor(m => m.City, new { @class = "xxs h-30 pd-15 pdx-2 full mw-500 form-control", @placeholder = "City" })
+            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-xxs full text-center error-text mb-1" })
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.TwoFactorEnabled, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.TwoFactorEnabled)
-                @Html.ValidationMessageFor(model => model.TwoFactorEnabled, "", new { @class = "text-danger" })
-            </div>
+        <div class="box full pd-05">
+            @Html.DropDownListFor(m => m.EmploymentRole,
+                new List<SelectListItem> {
+                    new SelectListItem { Text = "Engineer", Value = "Engineer" },
+                    new SelectListItem { Text = "Call Handler", Value = "CallHandler" },
+                    new SelectListItem { Text = "Manager", Value = "Manager" },
+                },
+            "Select Staff Role", htmlAttributes: new { @class = "xxs pd-15 pdx-2 full mw-400", @placeholder = "Staff Role" })
+            @Html.ValidationMessageFor(model => model.EmploymentRole, "", new { @class = "text-xxs full text-center error-text mb-1" })
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.LockoutEndDateUtc, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.LockoutEndDateUtc, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.LockoutEndDateUtc, "", new { @class = "text-danger" })
+        <div class="box full pd-05">
+            @Html.TextBoxFor(m => m.Salary, new { @class = "xxs h-30 pd-15 pdx-2 full mw-500 form-control", @placeholder = "Salary", @type = "number" })
+            @Html.ValidationMessageFor(model => model.Salary, "", new { @class = "text-xxs full text-center error-text mb-1" })
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.LockoutEnabled, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.LockoutEnabled)
-                @Html.ValidationMessageFor(model => model.LockoutEnabled, "", new { @class = "text-danger" })
-            </div>
+        <div class="box full pd-05">
+            @Html.PasswordFor(m => m.Password, new { @class = "xxs h-30 pd-15 pdx-2 full mw-500 form-control", @placeholder = "Password" })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-xxs full text-center error-text mb-1" })
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.AccessFailedCount, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.AccessFailedCount, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.AccessFailedCount, "", new { @class = "text-danger" })
+        <div class="box full dfb align-center gap-10 mt-3">
+            <button type="submit" class="xxxs pd-12 pdx-2 fit whitespace-nowrap">
+                <i data-lucide="user-round-plus" style="height: 18px;"></i> Create Staff
+            </button>
+            <a href="@Url.Action("Index", "Staffs")">
+                <button type="button" class="xxxs pd-12 pdx-2 fit outline-black whitespace-nowrap">
+                    Back To Staffs List
+                </button>
+            </a>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-        </div>
+        <br /><br />
     </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

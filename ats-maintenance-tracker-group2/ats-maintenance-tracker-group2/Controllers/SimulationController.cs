@@ -24,7 +24,7 @@ namespace ats_maintenance_tracker_group2.Controllers
             {
                 var staff = db.Users.Find(User.Identity.GetUserId());
 
-                if (staff.EmploymentRole == "CallHandler")
+                if (staff.EmploymentRole != "Engineer")
                 {
                     UpdateTurbineHoursViewModel viewModel = new UpdateTurbineHoursViewModel
                     {

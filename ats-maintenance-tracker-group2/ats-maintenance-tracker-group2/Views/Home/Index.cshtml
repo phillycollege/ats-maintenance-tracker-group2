@@ -55,10 +55,18 @@
         </a>
     }
     @if (Model.staff.EmploymentRole == "Manager") {
-        <a href="@Url.Action("Index", "Shifts")" class="box fit" style="min-width: 350px;">
+        <a href="@Url.Action("Index", "Staffs")" class="box fit" style="min-width: 350px;">
+            <div class="navigation-card" style="background: rgba(184, 245, 255, 0.376);">
+                <div class="navigation-card-icon" style="background: rgba(184, 245, 255);">
+                    <i data-lucide="user-round-cog"></i>
+                </div>
+                <div class="text-m bold-700 full">All Staff</div>
+            </div>
+        </a>
+        <a href="@Url.Action("ShiftView", "Shifts")" class="box fit" style="min-width: 350px;">
             <div class="navigation-card" style="background: rgba(255, 94, 94, 0.376);">
                 <div class="navigation-card-icon" style="background: rgba(255, 94, 94);">
-                    <i data-lucide="calendar-clock"></i>
+                    <i data-lucide="book-user"></i>
                 </div>
                 <div class="text-m bold-700 full">Engineer Shifts</div>
             </div>

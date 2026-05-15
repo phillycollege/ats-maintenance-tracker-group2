@@ -39,7 +39,7 @@
                         <div class="box full dfb gap-10">
                             @Html.ActionLink("Edit", "Edit", new { id = item.FarmID }, new { @class = "box fit visible-link accent-color" } ) |
                             @Html.ActionLink("Details", "Details", new { id=item.FarmID }, new { @class = "box fit visible-link accent-color" }) |
-                            @Html.ActionLink("Delete", "Delete", new { id=item.FarmID }, new { @class = "box fit visible-link accent-color" })
+                            @Html.ActionLink("Delete", "Delete", new { id=item.FarmID }, new { @class = "box fit visible-link", @style = "color: red;" })
                         </div>
                     </td>
                 </tr>
