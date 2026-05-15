@@ -34,15 +34,20 @@
                     <td>
                         @if (Model.staff.EmploymentRole == "CallHandler" || Model.staff.EmploymentRole == "Manager") {
                             <div class="box full dfb gap-10">
-                                @Html.ActionLink("Edit", "Edit", new { id = item.JobID }, new { @class = "box fit visible-link accent-color" }) |
                                 @Html.ActionLink("Details", "Details", new { id = item.JobID }, new { @class = "box fit visible-link accent-color" }) |
                                 @Html.ActionLink("Delete", "Delete", new { id = item.JobID }, new { @class = "box fit visible-link", @style = "color: red;" })
                             </div>
                         } else {
-                            <div class="box full dfb gap-10">
-                                @Html.ActionLink("Details", "Details", new { id = item.JobID }, new { @class = "box fit visible-link accent-color" }) |
-                                @Html.ActionLink("Update Status", "UpdateStatus", new { id = item.JobID }, new { @class = "box fit visible-link accent-color" })
-                            </div>
+                            if (item.JobCompleteStatus == "Completed") {
+                                <div class="box full dfb gap-10">
+                                    @Html.ActionLink("Details", "Details", new { id = item.JobID }, new { @class = "box fit visible-link accent-color" })
+                                </div>
+                            } else {
+                                <div class="box full dfb gap-10">
+                                    @Html.ActionLink("Details", "Details", new { id = item.JobID }, new { @class = "box fit visible-link accent-color" }) |
+                                    @Html.ActionLink("Update Status", "UpdateStatus", new { id = item.JobID }, new { @class = "box fit visible-link accent-color" })
+                                </div>
+                            }
                         }
                     </td>
                 </tr>

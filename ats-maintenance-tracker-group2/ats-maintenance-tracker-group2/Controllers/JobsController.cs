@@ -18,15 +18,19 @@ namespace ats_maintenance_tracker_group2.Controllers {
 
         // GET: Jobs
         public ActionResult Index() {
+            // check if user is logged in
+            // redirect users who are not logged in to the login page
             if (Request.IsAuthenticated) {
                 var staff = db.Users.Find(User.Identity.GetUserId());
 
                 if (staff.EmploymentRole == "CallHandler" || staff.EmploymentRole == "Manager") {
+                    // call handler and manager
                     // can view all jobs
                     var jobs = db.Jobs
                         .Include(j => j.Staff)
                         .Include(j => j.WindFarm)
                         .Include(j => j.Turbine)
+                        .OrderByDescending(j => j.JobID)
                         .ToList();
 
                     AllJobsPageValues allJobsPageValues = new AllJobsPageValues() {
@@ -42,6 +46,7 @@ namespace ats_maintenance_tracker_group2.Controllers {
                         .Include(j => j.WindFarm)
                         .Include(j => j.Turbine)
                         .Where(j => j.StaffID == staff.StaffID)
+                        .OrderByDescending(j => j.JobID)
                         .ToList();
 
                     AllJobsPageValues allJobsPageValues = new AllJobsPageValues() {
@@ -74,6 +79,9 @@ namespace ats_maintenance_tracker_group2.Controllers {
 
         // GET: Jobs/CreateFaultJob
         public ActionResult CreateFaultJob () {
+            // check if user is logged in
+            // redirect users who are not logged in to the login page
+            // redirect users who are not call handlers tp the home page
             if (Request.IsAuthenticated) {
                 var staff = db.Users.Find(User.Identity.GetUserId());
 
@@ -195,11 +203,15 @@ namespace ats_maintenance_tracker_group2.Controllers {
         }
 
         public ActionResult UpdateStatus(int? id) {
+            // check if user is logged in
+            // redirect users who are not logged in to the login page
             if (Request.IsAuthenticated) {
                 var staff = db.Users.Find(User.Identity.GetUserId());
                 if (id == null) {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
+
+                // get the job to be updated
                 Job job = db.Jobs
                     .Include(j => j.Staff)
                     .Include(j => j.WindFarm)
@@ -209,6 +221,8 @@ namespace ats_maintenance_tracker_group2.Controllers {
                 if (job == null) {
                     return HttpNotFound();
                 }
+
+                // pass the update job status form view model to the frontend
                 UpdateJobStatusViewModel updateJobStatusViewModel = new UpdateJobStatusViewModel() {
                     JobID = job.JobID,
                     FarmName = job.WindFarm.FarmName,
@@ -236,72 +250,21 @@ namespace ats_maintenance_tracker_group2.Controllers {
                 return HttpNotFound();
             }
 
+            // Update the components that may have been serviced
+            job.MainGeneratorServiced = model.MainGeneratorServiced;
+            job.InternalPassengerLiftServiced = model.InternalPassengerLiftServiced;
+            job.GearboxServiced = model.GearboxServiced;
+            job.YawMotorServiced = model.YawMotorServiced;
+
+            // set turbine runtime hours to 0
+            var turbine = db.Turbines.Where(t => t.TurbineID == model.TurbineId).ToList().FirstOrDefault();
+            turbine.RuntimeHours = 0;
+
             // Update the status and save changes
             job.JobCompleteStatus = model.JobCompleteStatus;
             db.SaveChanges();
 
             return RedirectToAction("Index");
         }
-
-        public ActionResult Edit(int? id) {
-            if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var staff = db.Users.Find(User.Identity.GetUserId());
-            var job = db.Jobs
-                .Include(j => j.Staff)
-                .FirstOrDefault(j => j.JobID == id);
-
-            if (job == null) {
-                return HttpNotFound();
-            }
-
-            // ✅ Restrict engineers to their own jobs only
-            if (staff.EmploymentRole == "Engineer" && job.StaffID != staff.StaffID) {
-                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
-            }
-
-            return View(job);
-        }
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Job job) {
-            var existingJob = db.Jobs.Find(job.JobID);
-
-            if (existingJob == null) {
-                return HttpNotFound();
-            }
-
-            var staff = db.Users.Find(User.Identity.GetUserId());
-
-            // ✅ Prevent editing other engineers' jobs
-            if (staff.EmploymentRole == "Engineer" && existingJob.StaffID != staff.StaffID) {
-                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
-            }
-
-            if (ModelState.IsValid) {
-                // Update allowed fields only
-                existingJob.FaultDescription = job.FaultDescription;
-                existingJob.MainGeneratorServiced = job.MainGeneratorServiced;
-                existingJob.GearboxServiced = job.GearboxServiced;
-                existingJob.YawMotorServiced = job.YawMotorServiced;
-                existingJob.InternalPassengerLiftServiced = job.InternalPassengerLiftServiced;
-                existingJob.JobCompleteStatus = job.JobCompleteStatus;
-
-                // ✅ If completed → unassign engineer
-                if (job.JobCompleteStatus == "Completed") {
-                    existingJob.StaffID = null;
-                }
-
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(job);
-        }
-
-
     }
 }
