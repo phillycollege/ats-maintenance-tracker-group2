@@ -98,6 +98,75 @@ namespace ats_maintenance_tracker_group2.Controllers {
             }
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateFaultJob(CreateFaultJobViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                // repopulate dropdowns
+                model.WindFarms = db.WindFarms.Select(w => new SelectListItem
+                {
+                    Value = w.FarmID.ToString(),
+                    Text = w.FarmName
+                }).ToList();
+
+                model.Turbines = db.Turbines.Select(t => new SelectListItem
+                {
+                    Value = t.TurbineID.ToString(),
+                    Text = t.TurbineID
+                }).ToList();
+
+                return View(model);
+            }
+
+            // Get turbine from selected turbine id
+            var turbine = db.Turbines.Find(model.SelectedTurbineId);
+
+            if (turbine == null)
+            {
+                ModelState.AddModelError("", "Turbine not found");
+                return View(model);
+            }
+
+            // Call assignment method
+            AssignedEngineerShift assignedEngineerShift =
+                new AssignEngineer().Assign();
+
+            // Create job
+            Job job = new Job()
+            {
+                TurbineID = turbine.TurbineID,
+
+                FarmID = model.SelectedWindFarmId,
+
+                FaultDescription = model.FaultDescription,
+
+                JobType = "Fault",
+
+                JobCompleteStatus = "Awaiting Engineer",
+
+                // Engineer chosen from assignment method
+                StaffID = assignedEngineerShift.Engineer.StaffID,
+
+                // Shift chosen from assignment method
+                JobDate = assignedEngineerShift.ShiftSession.jobTime,
+                JobTime = assignedEngineerShift.ShiftSession.shiftTime,
+
+                // defaults
+                MainGeneratorServiced = false,
+                GearboxServiced = false,
+                YawMotorServiced = false,
+                InternalPassengerLiftServiced = false
+            };
+
+            db.Jobs.Add(job);
+            ViewBag.Result = $"Fault Job created";
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         // GET: Jobs/Details/1
         public ActionResult Details(int? id) {
             if (Request.IsAuthenticated) {
