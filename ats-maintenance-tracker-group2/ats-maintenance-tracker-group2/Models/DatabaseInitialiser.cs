@@ -306,8 +306,8 @@ namespace ats_maintenance_tracker_group2.Models
                     RuntimeHours = 1100 + (i * 70), // max 1800
                     IsHighWinds = i % 5 == 0,
                     OperationalStatus = i % 5 == 0
-                        ? "6 High Wind Shutdown"
-                        : "1 Operational",
+                        ? "Fault"
+                        : "Active",
                     Coordinates = $"55.67{i}, -3.78{i}",
                     FarmID = "WF001"
                 });
@@ -326,8 +326,8 @@ namespace ats_maintenance_tracker_group2.Models
                     RuntimeHours = 1500 + (i * 30), // max 1800
                     IsHighWinds = false,
                     OperationalStatus = i % 4 == 0
-                        ? "2 Maintenance Required"
-                        : "1 Operational",
+                        ? "Requires Service"
+                        : "Active",
                     Coordinates = $"57.47{i}, -4.21{i}",
                     FarmID = "WF002"
                 });
@@ -346,8 +346,8 @@ namespace ats_maintenance_tracker_group2.Models
                     RuntimeHours = 900 + (i * 90), // max 1800
                     IsHighWinds = false,
                     OperationalStatus = i % 3 == 0
-                        ? "3 Fault Detected"
-                        : "1 Operational",
+                        ? "Fault"
+                        : "Active",
                     Coordinates = $"57.14{i}, -2.09{i}",
                     FarmID = "WF003"
                 });
@@ -366,8 +366,8 @@ namespace ats_maintenance_tracker_group2.Models
                     RuntimeHours = 1600 + (i * 30), // max 1900
                     IsHighWinds = false,
                     OperationalStatus = i % 2 == 0
-                        ? "4 Under Maintenance"
-                        : "1 Operational",
+                        ? "Requires Service"
+                        : "Active",
                     Coordinates = $"56.00{i}, -3.71{i}",
                     FarmID = "WF004"
                 });
