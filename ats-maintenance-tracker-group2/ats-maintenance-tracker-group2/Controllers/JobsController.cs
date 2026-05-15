@@ -10,6 +10,7 @@ using System.Net;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace ats_maintenance_tracker_group2.Controllers {
     public class JobsController : Controller {
@@ -108,19 +109,15 @@ namespace ats_maintenance_tracker_group2.Controllers {
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateFaultJob(CreateFaultJobViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
+        public ActionResult CreateFaultJob(CreateFaultJobViewModel model) {
+            if (!ModelState.IsValid) {
                 // repopulate dropdowns
-                model.WindFarms = db.WindFarms.Select(w => new SelectListItem
-                {
+                model.WindFarms = db.WindFarms.Select(w => new SelectListItem {
                     Value = w.FarmID.ToString(),
                     Text = w.FarmName
                 }).ToList();
 
-                model.Turbines = db.Turbines.Select(t => new SelectListItem
-                {
+                model.Turbines = db.Turbines.Select(t => new SelectListItem {
                     Value = t.TurbineID.ToString(),
                     Text = t.TurbineID
                 }).ToList();
@@ -131,36 +128,37 @@ namespace ats_maintenance_tracker_group2.Controllers {
             // Get turbine from selected turbine id
             var turbine = db.Turbines.Find(model.SelectedTurbineId);
 
-            if (turbine == null)
-            {
+            if (turbine == null) {
                 ModelState.AddModelError("", "Turbine not found");
                 return View(model);
             }
 
             // Call assignment method
-            AssignedEngineerShift assignedEngineerShift =
-                new AssignEngineer().Assign();
+            AssignedEngineerShift assignedEngineerShift = new AssignEngineer().Assign();
+
+            // Redifined fault description based on components that were marked as faulty
+            List<string> componentsToService = new List<string>();
+
+            if (model.MainGeneratorServiced) componentsToService.Add("Main Generator");
+            if (model.InternalPassengerLiftServiced) componentsToService.Add("Internal Passenger Lift");
+            if (model.YawMotorServiced) componentsToService.Add("Yaw Motor");
+            if (model.GearboxServiced) componentsToService.Add("Gear Box");
+
+            string componentFaultDescription = "The following components are faulty: " + string.Join(", ", componentsToService) + ".";
+            string fullFaultDescription = model.FaultDescription + Environment.NewLine + componentFaultDescription;
 
             // Create job
-            Job job = new Job()
-            {
+            Job job = new Job() {
                 TurbineID = turbine.TurbineID,
-
                 FarmID = model.SelectedWindFarmId,
-
-                FaultDescription = model.FaultDescription,
-
+                FaultDescription = fullFaultDescription,
                 JobType = "Fault",
-
                 JobCompleteStatus = "Awaiting Engineer",
-
                 // Engineer chosen from assignment method
                 StaffID = assignedEngineerShift.Engineer.StaffID,
-
                 // Shift chosen from assignment method
                 JobDate = assignedEngineerShift.ShiftSession.jobTime,
                 JobTime = assignedEngineerShift.ShiftSession.shiftTime,
-
                 // defaults
                 MainGeneratorServiced = false,
                 GearboxServiced = false,
@@ -265,6 +263,60 @@ namespace ats_maintenance_tracker_group2.Controllers {
             db.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+
+        // GET: Jobs/Delete/5
+        public ActionResult Delete(int id) {
+            // check if user is logged in
+            // redirect users who are not logged in to the login page
+            // redirect engineers to the home page
+            if (Request.IsAuthenticated) {
+                var staff = db.Users.Find(User.Identity.GetUserId());
+                if (id == null) {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                // redirect users who are engineers
+                if (staff.EmploymentRole != "Engineer") {
+                    if (id == null) {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+
+                    Job job = db.Jobs.Include(j => j.WindFarm)
+                        .Include(j => j.Staff)
+                        .Where(j => j.JobID == id)
+                        .ToList()
+                        .FirstOrDefault();
+
+                    if (job == null) {
+                        return HttpNotFound();
+                    }
+                    return View(job);
+                } else {
+                    return RedirectToAction("Index", "Jobs");
+                }
+            } else {
+                return RedirectToAction("Login", "Account");
+            }
+
+        }
+
+        // POST: Jobs/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id) {
+            Job job = db.Jobs.Find(id);
+            db.Jobs.Remove(job);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing) {
+            if (disposing) {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
