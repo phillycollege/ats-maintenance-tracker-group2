@@ -26,12 +26,20 @@ namespace ats_maintenance_tracker_group2.Models {
     // create fault job form view model: FAULT LOGGIN
     public class CreateFaultJobViewModel {
 
+        [Required]
         [Display(Name = "Wind Farm")]
         public string SelectedWindFarmId { get; set; }
 
+        [Required]
         [Display(Name = "Turbine")]
         public string SelectedTurbineId { get; set; }
 
+        public bool MainGeneratorServiced { get; set; } = false;
+        public bool GearboxServiced { get; set; } = false;
+        public bool YawMotorServiced { get; set; } = false;
+        public bool InternalPassengerLiftServiced { get; set; } = false;
+
+        [Required]
         public string FaultDescription { get; set; }
 
         // list of windfarms and turbines for dropdown data
@@ -41,12 +49,15 @@ namespace ats_maintenance_tracker_group2.Models {
 
     // update turbine hours form view model: SIMULATION
     public class UpdateTurbineHoursViewModel {
+        [Required]
         [Display(Name = "Wind Farm")]
         public string SelectedWindFarmId { get; set; }
 
+        [Required]
         [Display(Name = "Turbine")]
         public string SelectedTurbineId { get; set; }
 
+        [Required]
         public int Hours { get; set; }
 
         // list of windfarms and turbines for dropdown data

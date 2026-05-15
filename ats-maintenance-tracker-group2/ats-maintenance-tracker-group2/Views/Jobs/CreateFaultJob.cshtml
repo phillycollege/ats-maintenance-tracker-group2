@@ -9,6 +9,7 @@
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
+
     <div class="form-horizontal">
         <div class="box full pd-05">
             @Html.DropDownListFor(
@@ -24,6 +25,27 @@
                 htmlAttributes: new { @class = "xxs pd-15 pdx-2 full mw-500 form-control", @placeholder = "Farm Id", @id = "turbineDropdown" }
             )
             @Html.ValidationMessageFor(model => model.SelectedTurbineId, "", new { @class = "text-xxs full text-center error-text mb-1" })
+        </div>
+
+
+        <div class="box full mb-1 mt-1">
+            <div class="text-xs full bold-600">What has a fault?</div>
+            <div class="box full pd-05">
+                @Html.EditorFor(model => model.MainGeneratorServiced, "", new { @class = "xxs pd-15 pdx-2 full mw-400" })
+                @Html.LabelFor(model => model.MainGeneratorServiced, "Main Generator", new { @class = "xxs pd-15 pdx-2 full mw-400" })
+            </div>
+            <div class="box full pd-05">
+                @Html.EditorFor(model => model.GearboxServiced, "", new { @class = "xxs pd-15 pdx-2 full mw-400" })
+                @Html.LabelFor(model => model.GearboxServiced, "Gear Box", new { @class = "xxs pd-15 pdx-2 full mw-400" })
+            </div>
+            <div class="box full pd-05">
+                @Html.EditorFor(model => model.InternalPassengerLiftServiced, "", new { @class = "xxs pd-15 pdx-2 full mw-400" })
+                @Html.LabelFor(model => model.InternalPassengerLiftServiced, "Internal Passenger Lift", new { @class = "xxs pd-15 pdx-2 full mw-400" })
+            </div>
+            <div class="box full pd-05">
+                @Html.EditorFor(model => model.YawMotorServiced, "", new { @class = "xxs pd-15 pdx-2 full mw-400" })
+                @Html.LabelFor(model => model.YawMotorServiced, "Yaw Motor", new { @class = "xxs pd-15 pdx-2 full mw-400" })
+            </div>
         </div>
 
         <div class="box full pd-05">
