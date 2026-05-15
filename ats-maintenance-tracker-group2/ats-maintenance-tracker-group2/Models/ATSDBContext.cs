@@ -13,6 +13,7 @@ namespace ats_maintenance_tracker_group2.Models
         public DbSet<Shift> Shifts { get; set; }
         public DbSet<WindFarm> WindFarms { get; set; }
         public DbSet<Turbine> Turbines { get; set; }
+        public DbSet<Holiday> Holidays { get; set; }
 
         public ATSDBContext() : base("ATSMaintenanceTrackerConnection", throwIfV1Schema: false)
         {

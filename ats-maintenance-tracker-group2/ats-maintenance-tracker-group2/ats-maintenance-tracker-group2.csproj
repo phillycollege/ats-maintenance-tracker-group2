@@ -164,6 +164,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HolidaysController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Models\DatabaseInitialiser.cs" />
     <Compile Include="Models\Engineer.cs" />
     <Compile Include="Models\FormViewModels.cs" />
+    <Compile Include="Models\Holiday.cs" />
     <Compile Include="Models\SimulationViewModel.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\Job.cs" />
@@ -293,6 +295,8 @@
     <Content Include="Views\Simulation\Index.cshtml" />
     <Content Include="Views\Jobs\CreateFaultJob.cshtml" />
     <Content Include="Views\Shifts\ShiftView.cshtml" />
+    <Content Include="Views\Holidays\Index.cshtml" />
+    <Content Include="Views\Holidays\BookHoliday.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

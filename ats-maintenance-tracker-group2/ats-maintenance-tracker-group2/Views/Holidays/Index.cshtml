@@ -1,0 +1,51 @@
+﻿
+@using ats_maintenance_tracker_group2.Models
+@model IEnumerable<Holiday>
+
+@{
+    ViewBag.Title = "Holidays";
+}
+
+<div class="box full dfb align-center pd-1 mb-3">
+    <div class="text-xxl bold-600 full">Holiday Bookings</div>
+</div>
+
+<div class="table-container">
+    <table class="custom-table">
+        <thead>
+            <tr id="head-row">
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Total Days</th>
+                <th>Status</th>
+                <th>Requested</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.StartDate.ToShortDateString()</td>
+                    <td>@item.EndDate.ToShortDateString()</td>
+                    <td>@((item.EndDate - item.StartDate).Days + 1)</td>
+
+                    <td>
+                        @{
+                            var badgeClass = "status-pending";
+
+                            if (item.Status == "Approved") { badgeClass = "status-approved"; }
+                            else if (item.Status == "Rejected") { badgeClass = "status-rejected"; }
+                        }
+
+                        <span class="status-badge @badgeClass">
+                            @item.Status
+                        </span>
+                    </td>
+
+                    <td>@item.DateRequested.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
