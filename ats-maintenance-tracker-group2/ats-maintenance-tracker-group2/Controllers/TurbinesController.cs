@@ -95,15 +95,13 @@ namespace ats_maintenance_tracker_group2.Controllers
         }
 
         // GET: Turbines/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
+        public ActionResult Delete(string id) {
+            if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Turbine turbine = db.Turbines.Find(id);
-            if (turbine == null)
-            {
+
+            Turbine turbine = db.Turbines.Include(t => t.WindFarm).ToList().Find(t => t.TurbineID == id);
+            if (turbine == null) {
                 return HttpNotFound();
             }
             return View(turbine);

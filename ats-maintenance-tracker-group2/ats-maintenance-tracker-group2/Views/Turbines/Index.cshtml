@@ -18,12 +18,8 @@
         <thead>
             <tr id='head-row'>
                 <th>@Html.DisplayNameFor(model => model.WindFarm.FarmName)</th>
-                <th>@Html.DisplayNameFor(model => model.TurbineMake)</th>
-                <th>@Html.DisplayNameFor(model => model.TurbineModel)</th>
-                <th>@Html.DisplayNameFor(model => model.RuntimeHours)</th>
-                <th>@Html.DisplayNameFor(model => model.IsHighWinds)</th>
+                <th>@Html.DisplayNameFor(model => model.TurbineID)</th>
                 <th>@Html.DisplayNameFor(model => model.OperationalStatus)</th>
-                <th>@Html.DisplayNameFor(model => model.Coordinates)</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -31,17 +27,13 @@
             @foreach (var item in Model) {
                 <tr>
                     <td class='name'>@Html.DisplayFor(modelItem => item.WindFarm.FarmName)</td>
-                    <td>@Html.DisplayFor(modelItem => item.TurbineMake)</td>
-                    <td>@Html.DisplayFor(modelItem => item.TurbineModel)</td>
-                    <td>@Html.DisplayFor(modelItem => item.RuntimeHours)</td>
-                    <td>@Html.DisplayFor(modelItem => item.IsHighWinds)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TurbineID)</td>
                     <td>@Html.DisplayFor(modelItem => item.OperationalStatus)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Coordinates)</td>
                     <td>
                         <div class="box full dfb gap-10">
                             @Html.ActionLink("Edit", "Edit", new { id = item.TurbineID }, new { @class = "box fit visible-link accent-color" }) |
                             @Html.ActionLink("Details", "Details", new { id = item.TurbineID }, new { @class = "box fit visible-link accent-color" }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.TurbineID }, new { @class = "box fit visible-link accent-color" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.TurbineID }, new { @class = "box fit visible-link", @style = "color: red;" })
                         </div>
                     </td>
                 </tr>
